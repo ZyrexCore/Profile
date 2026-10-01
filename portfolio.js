@@ -1,4 +1,4 @@
-const VERSION='V.2.0.6';
+const VERSION='V.2.0.7';
 const SOCIAL={roblox:'https://www.roblox.com/users/4818300014/profile',instagram:'https://www.instagram.com/manvith_1005?igsh=bWppbzBxZWc9emhv',discord:'https://discord.gg/nGqKXKNKsW'};
 const FEEDBACK_ENDPOINT='https://orange-waterfall-e488.linganagoudapatilpatil.workers.dev';
 const esc=s=>String(s??'').replace(/[&<>\"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[c]));
@@ -19,7 +19,7 @@ function initKineticHero(){
    const lane=document.createElement('div');
    lane.className='hero-moving-lane '+cls;
    lane.setAttribute('aria-hidden','true');
-   lane.innerHTML='<span>'+text+'</span><span>'+text+'</span><span>'+text+'</span><span>'+text+'</span>';
+   lane.innerHTML='<div class="hero-moving-lane-track"><span>'+text+'</span><span>'+text+'</span><span>'+text+'</span><span>'+text+'</span><span>'+text+'</span><span>'+text+'</span></div>';
    lane.dataset.dir=dir;
    wrap.insertBefore(lane,brand);
    return lane;
@@ -56,6 +56,22 @@ function initKineticHero(){
    requestAnimationFrame(tick);
  };
  tick();
+}
+const AUDIO_ITEMS=[
+ {title:'Your Track / Video 01',artist:'YouTube',url:'https://www.youtube.com/watch?v=YOUR_VIDEO_ID'},
+ {title:'Your Track / Video 02',artist:'YouTube',url:'https://www.youtube.com/watch?v=YOUR_VIDEO_ID'}
+];
+function youtubeId(url){
+ const m=String(url||'').match(/(?:youtube\\.com\\/(?:watch\\?v=|embed\\/|shorts\\/)|youtu\\.be\\/)([A-Za-z0-9_-]{6,})/);
+ return m?m[1]:'';
+}
+function renderAudio(containerId='audioGrid'){
+ const box=document.getElementById(containerId);if(!box)return;
+ box.innerHTML=AUDIO_ITEMS.map((item,i)=>{
+  const id=youtubeId(item.url);
+  if(!id)return '';
+  return '<article class="audio-card"><div class="audio-player"><iframe loading="lazy" src="https://www.youtube.com/embed/'+id+'?rel=0&modestbranding=1" title="'+esc(item.title)+'" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div><div class="audio-info"><div><div class="kicker">AUDIO '+String(i+1).padStart(2,'0')+'</div><h3>'+esc(item.title)+'</h3><p>'+esc(item.artist)+'</p></div><a class="btn" href="'+esc(item.url)+'" target="_blank" rel="noopener">YouTube ↗</a></div></article>';
+ }).join('');
 }
 function initPreviewScroll(){if(document.body.classList.contains('gallery-page'))return;document.querySelectorAll('.grid').forEach(grid=>{if(grid.dataset.previewScroll==='1')return;grid.dataset.previewScroll='1';const wrap=document.createElement('div');wrap.className='preview-scroll-wrap';grid.parentNode.insertBefore(wrap,grid);wrap.appendChild(grid);const prev=document.createElement('button');prev.className='preview-scroll-btn preview-scroll-prev';prev.type='button';prev.setAttribute('aria-label','Previous preview');prev.innerHTML='‹';const next=document.createElement('button');next.className='preview-scroll-btn preview-scroll-next';next.type='button';next.setAttribute('aria-label','Next preview');next.innerHTML='›';wrap.append(prev,next);const cards=[...grid.children].filter(el=>el.classList.contains('card'));let index=0;const update=()=>{if(window.innerWidth>600){cards.forEach(c=>c.hidden=false);prev.hidden=true;next.hidden=true;return}cards.forEach((c,i)=>{c.hidden=i!==index});prev.hidden=cards.length<2;next.hidden=cards.length<2;prev.disabled=index<=0;next.disabled=index>=cards.length-1};prev.addEventListener('click',()=>{if(index>0){index--;update()}});next.addEventListener('click',()=>{if(index<cards.length-1){index++;update()}});window.addEventListener('resize',update);update()})}
 function initSharedCardFX(){
