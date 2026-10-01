@@ -31,15 +31,13 @@ function openLightbox(src){const l=document.getElementById('lightbox');document.
 document.addEventListener('click',e=>{const l=document.getElementById('lightbox');if(l?.classList.contains('open')&&e.target===l)closeLightbox()});
 
 function initSFX(){
- if(window.__zyrexSFX)return; window.__zyrexSFX=true;
+ if(window.__zyrexSFX)return;window.__zyrexSFX=true;
  let ctx=null,enabled=localStorage.getItem('zyrex_sfx')!=='0',lastHover=0;
- const ensure=()=>{if(!enabled)return null;try{ctx??=new (window.AudioContext||window.webkitAudioContext)();if(ctx.state==='suspended')ctx.resume();return ctx}catch{return null}};
- const blip=(freq,dur=.045,type='sine',gain=.018)=>{const c=ensure();if(!c)return;const o=c.createOscillator(),g=c.createGain();o.type=type;o.frequency.setValueAtTime(freq,c.currentTime);o.frequency.exponentialRampToValueAtTime(Math.max(80,freq*.72),c.currentTime+dur);g.gain.setValueAtTime(.0001,c.currentTime);g.gain.exponentialRampToValueAtTime(gain,c.currentTime+.006);g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+dur);o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+dur+.01)};
- const toggle=document.createElement('button');toggle.className='sfx-toggle';toggle.type='button';toggle.setAttribute('aria-label','Toggle interface sound effects');toggle.textContent=enabled?'SFX ON':'SFX OFF';
- toggle.onclick=()=>{enabled=!enabled;localStorage.setItem('zyrex_sfx',enabled?'1':'0');toggle.textContent=enabled?'SFX ON':'SFX OFF';if(enabled)blip(620,.07,'triangle',.025)};
- document.body.append(toggle);
- document.addEventListener('pointerover',e=>{if(e.target.closest('a,button,.card')&&Date.now()-lastHover>70){lastHover=Date.now();blip(520,.025,'sine',.009)}},{passive:true});
- document.addEventListener('click',e=>{if(e.target.closest('a,button,.card'))blip(760,.055,'triangle',.015)},{passive:true});
+ const getCtx=()=>{try{ctx??=new (window.AudioContext||window.webkitAudioContext)();if(ctx.state==='suspended')ctx.resume();return ctx}catch{return null}};
+ const play=(freq=650,duration=.07,gain=.035)=>{if(!enabled)return;const c=getCtx();if(!c)return;const o=c.createOscillator(),g=c.createGain();o.type='triangle';o.frequency.setValueAtTime(freq,c.currentTime);o.frequency.exponentialRampToValueAtTime(freq*.72,c.currentTime+duration);g.gain.setValueAtTime(.0001,c.currentTime);g.gain.exponentialRampToValueAtTime(gain,c.currentTime+.008);g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+duration);o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+duration+.015)};
+ const toggle=document.createElement('button');toggle.className='sfx-toggle';toggle.type='button';toggle.textContent=enabled?'SFX ON':'SFX OFF';toggle.onclick=e=>{e.stopPropagation();enabled=!enabled;localStorage.setItem('zyrex_sfx',enabled?'1':'0');toggle.textContent=enabled?'SFX ON':'SFX OFF';if(enabled)play(700,.09,.04)};document.body.append(toggle);
+ document.addEventListener('pointerover',e=>{if(e.target.closest('a,button,.card')&&!e.target.closest('.sfx-toggle')&&Date.now()-lastHover>100){lastHover=Date.now();play(520,.04,.018)}},{passive:true});
+ document.addEventListener('pointerdown',e=>{if(e.target.closest('a,button,.card')&&!e.target.closest('.sfx-toggle'))play(760,.065,.035)},{passive:true});
 }
 
 function initGfxMasonry(){
