@@ -60,15 +60,17 @@ function initKineticHero(){
 function initPreviewScroll(){if(document.body.classList.contains('gallery-page'))return;document.querySelectorAll('.grid').forEach(grid=>{if(grid.dataset.previewScroll==='1')return;grid.dataset.previewScroll='1';const wrap=document.createElement('div');wrap.className='preview-scroll-wrap';grid.parentNode.insertBefore(wrap,grid);wrap.appendChild(grid);const prev=document.createElement('button');prev.className='preview-scroll-btn preview-scroll-prev';prev.type='button';prev.setAttribute('aria-label','Previous preview');prev.innerHTML='‹';const next=document.createElement('button');next.className='preview-scroll-btn preview-scroll-next';next.type='button';next.setAttribute('aria-label','Next preview');next.innerHTML='›';wrap.append(prev,next);const cards=[...grid.children].filter(el=>el.classList.contains('card'));let index=0;const update=()=>{if(window.innerWidth>600){cards.forEach(c=>c.hidden=false);prev.hidden=true;next.hidden=true;return}cards.forEach((c,i)=>{c.hidden=i!==index});prev.hidden=cards.length<2;next.hidden=cards.length<2;prev.disabled=index<=0;next.disabled=index>=cards.length-1};prev.addEventListener('click',()=>{if(index>0){index--;update()}});next.addEventListener('click',()=>{if(index<cards.length-1){index++;update()}});window.addEventListener('resize',update);update()})}
 function bootChrome(active){if(!document.querySelector('.version-badge'))document.body.insertAdjacentHTML('afterbegin',`<div class="version-badge" aria-label="Portfolio version">${VERSION}</div>`);document.body.insertAdjacentHTML('afterbegin',`<div class="cursor-light" id="cursorLight"></div>`+nav(active));document.body.insertAdjacentHTML('beforeend','<div class="lightbox" id="lightbox"><button class="close" onclick="closeLightbox()">Close ✕</button><img id="lightboxImg" alt="Preview"></div>'+feedbackModal()+'<div class="feedback-toast" id="feedbackToast" role="status" aria-live="polite"></div>');initKineticHero();initPreviewScroll();initSFX();if(document.body.classList.contains('gfx-page'))initGfxMasonry();const c=document.getElementById('cursorLight');
  let mx=0,my=0,trail=[];
- window.addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY;if(c){c.style.left=mx+'px';c.style.top=my+'px'}},{passive:true});
- for(let i=0;i<12;i++){const dot=document.createElement('i');dot.className='cursor-trail';dot.style.setProperty('--n',i);document.body.append(dot);trail.push({el:dot,x:mx,y:my,vx:0,vy:0})}
+ const pointer=(x,y)=>{mx=x;my=y;if(c){c.style.left=x+'px';c.style.top=y+'px'}};
+ window.addEventListener('pointermove',e=>pointer(e.clientX,e.clientY),{passive:true});
+ for(let i=0;i<16;i++){const dot=document.createElement('i');dot.className='cursor-trail';dot.style.setProperty('--n',i);document.body.append(dot);trail.push({el:dot,x:mx,y:my})}
  const animateTrail=()=>{
    let tx=mx,ty=my;
    trail.forEach((p,i)=>{
-     const stiffness=.22-i*.006,damping=.72;
-     p.vx=(p.vx+(tx-p.x)*stiffness)*damping;p.vy=(p.vy+(ty-p.y)*stiffness)*damping;
-     p.x+=p.vx;p.y+=p.vy;
-     p.el.style.transform='translate3d('+p.x+'px,'+p.y+'px,0) scale('+(1-i*.055)+')';
+     const follow=i===0?.34:.22;
+     p.x+=(tx-p.x)*follow;
+     p.y+=(ty-p.y)*follow;
+     const scale=Math.max(.42,1-i*.045);
+     p.el.style.transform='translate3d('+p.x+'px,'+p.y+'px,0) scale('+scale+')';
      tx=p.x;ty=p.y;
    });
    requestAnimationFrame(animateTrail)
