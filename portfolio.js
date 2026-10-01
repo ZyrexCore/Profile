@@ -61,7 +61,7 @@ const AUDIO_ITEMS=[
  {url:'https://youtu.be/IAONd2d_PDU?si=-XdG9hDSDfnKqTgM'}
 ];
 function youtubeId(url){
- const m=String(url||'').match(/(?:youtube\\.com\\/(?:watch\\?v=|embed\\/|shorts\\/)|youtu\\.be\\/)([A-Za-z0-9_-]{6,})/);
+ const m=String(url||'').match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([A-Za-z0-9_-]{6,})/);
  return m?m[1]:'';
 }
 async function renderAudio(containerId='audioGrid'){
