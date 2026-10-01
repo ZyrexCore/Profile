@@ -1,4 +1,4 @@
-const VERSION='V.2.0.14';
+const VERSION='V.2.0.15';
 const SOCIAL={roblox:'https://www.roblox.com/users/4818300014/profile',instagram:'https://www.instagram.com/manvith_1005?igsh=bWppbzBxZWc9emhv',discord:'https://discord.gg/nGqKXKNKsW'};
 const FEEDBACK_ENDPOINT='https://orange-waterfall-e488.linganagoudapatilpatil.workers.dev';
 const esc=s=>String(s??'').replace(/[&<>\"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[c]));
