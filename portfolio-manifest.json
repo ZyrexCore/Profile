@@ -42,31 +42,61 @@
   {
     "type": "gfx",
     "number": 1,
+    "title": "AdmissionForm",
+    "file": "GFX/AdmissionForm.jpg"
+  },
+  {
+    "type": "gfx",
+    "number": 2,
+    "title": "Annualday Card",
+    "file": "GFX/Annualday Card.png"
+  },
+  {
+    "type": "gfx",
+    "number": 3,
+    "title": "Christmas PNG",
+    "file": "GFX/Christmas PNG.jpg"
+  },
+  {
+    "type": "gfx",
+    "number": 4,
+    "title": "Cover",
+    "file": "GFX/Cover.jpg"
+  },
+  {
+    "type": "gfx",
+    "number": 5,
     "title": "gfx1",
     "file": "GFX/gfx1.png"
   },
   {
     "type": "gfx",
-    "number": 2,
+    "number": 6,
     "title": "gfx2",
     "file": "GFX/gfx2.png"
   },
   {
     "type": "gfx",
-    "number": 3,
+    "number": 7,
     "title": "gfx3",
     "file": "GFX/gfx3.png"
   },
   {
     "type": "gfx",
-    "number": 4,
+    "number": 8,
     "title": "gfx4",
     "file": "GFX/gfx4.png"
   },
   {
     "type": "gfx",
-    "number": 5,
+    "number": 9,
     "title": "KINNI PILI - Front",
     "file": "GFX/KINNI PILI - Front.jpg"
+  },
+  {
+    "type": "gfx",
+    "number": 10,
+    "title": "sPORTS dAY",
+    "file": "GFX/sPORTS dAY.png"
   }
 ]
