@@ -39,12 +39,10 @@ function initSFX(){
 }
 function initGfxMasonry(){
  const grid=document.getElementById('gfxGrid');if(!grid||grid.dataset.masonry==='1')return;grid.dataset.masonry='1';
- const layout=()=>{const cards=[...grid.children].filter(x=>x.classList.contains('card'));if(!cards.length)return;const gap=window.innerWidth<=600?13:window.innerWidth<=900?14:20;const cols=window.innerWidth<=600?1:window.innerWidth<=900?2:3;const colW=(grid.clientWidth-gap*(cols-1))/cols;const ys=Array(cols).fill(0);
- cards.forEach(card=>{card.style.width=colW+'px';const col=ys.indexOf(Math.min(...ys));card.style.left=(col*(colW+gap))+'px';card.style.top=ys[col]+'px';ys[col]+=card.offsetHeight+gap});
- grid.style.height=Math.max(...ys)-gap+'px'};
- const run=()=>requestAnimationFrame(layout);
- new MutationObserver(run).observe(grid,{childList:true});
- window.addEventListener('resize',run,{passive:true});
- grid.querySelectorAll('img').forEach(img=>{if(!img.complete)img.addEventListener('load',run,{once:true});});
- run();
+ let raf=0;
+ const layout=()=>{cancelAnimationFrame(raf);raf=requestAnimationFrame(()=>{const cards=[...grid.children].filter(x=>x.classList.contains('card'));if(!cards.length){grid.style.height='';return}const gap=window.innerWidth<=600?13:window.innerWidth<=900?14:20;const cols=window.innerWidth<=600?1:window.innerWidth<=900?2:3;const colW=(grid.clientWidth-gap*(cols-1))/cols;const ys=Array(cols).fill(0);cards.forEach(card=>{card.style.width=colW+'px';const col=ys.indexOf(Math.min(...ys));card.style.left=(col*(colW+gap))+'px';card.style.top=ys[col]+'px';ys[col]+=card.offsetHeight+gap});grid.style.height=Math.max(0,Math.max(...ys)-gap)+'px'})};
+ const watch=()=>{grid.querySelectorAll('img').forEach(img=>{if(!img.dataset.masonryWatch){img.dataset.masonryWatch='1';img.addEventListener('load',layout,{once:true})}});layout()};
+ new MutationObserver(watch).observe(grid,{childList:true});
+ if(window.ResizeObserver){const ro=new ResizeObserver(layout);ro.observe(grid);new MutationObserver(()=>grid.querySelectorAll('.card').forEach(card=>ro.observe(card))).observe(grid,{childList:true})}
+ window.addEventListener('resize',layout,{passive:true});watch();
 }
