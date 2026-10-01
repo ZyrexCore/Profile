@@ -357,3 +357,69 @@ body:after{display:none!important}
 @media(prefers-reduced-motion:reduce){
  .hero-brand,.hero-brand .hero-letter,.hero-brand-wrap:before,.hero-brand-wrap:after{animation:none!important}
 }
+
+/* ZYREXCORE HERO — real logo animation + pointer interaction */
+.hero-brand-wrap{--mx:0;--my:0;transform-style:preserve-3d}
+.hero-brand{
+ transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateZ(0)!important;
+ transition:transform .16s ease-out,filter .2s ease;
+ animation:zyrexLogoPulse 3.8s ease-in-out infinite!important;
+ position:relative!important;
+}
+.hero-brand:before{
+ content:""!important;
+ position:absolute!important;
+ inset:-8% -3%!important;
+ z-index:5!important;
+ pointer-events:none!important;
+ background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.85) 48%,rgba(255,255,255,.15) 51%,transparent 63%)!important;
+ transform:translateX(-130%)!important;
+ animation:zyrexShine 4.8s cubic-bezier(.2,.7,.2,1) infinite!important;
+ opacity:.55!important;
+}
+.hero-brand:after{
+ content:""!important;
+ position:absolute!important;
+ inset:-18%!important;
+ z-index:-1!important;
+ pointer-events:none!important;
+ background:radial-gradient(circle at calc(50% + var(--mx)*80%) calc(50% + var(--my)*80%),rgba(77,232,255,.28),transparent 28%)!important;
+ filter:blur(24px)!important;
+ opacity:.65!important;
+}
+.hero-brand>.hero-letter{
+ display:inline-block!important;
+ position:relative!important;
+ animation:zyrexLetter 3.2s ease-in-out infinite!important;
+ animation-delay:calc(var(--i)*-.13s)!important;
+ transform:translate3d(var(--lx,0px),var(--ly,0px),0)!important;
+ transition:transform .12s ease-out,color .2s ease,filter .2s ease!important;
+ will-change:transform,filter;
+}
+.hero-brand>.hero-letter:nth-child(2n){animation-delay:calc(var(--i)*-.13s - .35s)!important}
+.hero-brand>.hero-letter:nth-child(3n){animation-delay:calc(var(--i)*-.13s - .7s)!important}
+@keyframes zyrexLogoPulse{
+ 0%,100%{filter:drop-shadow(0 0 18px rgba(139,92,246,.22))}
+ 50%{filter:drop-shadow(0 0 34px rgba(53,224,255,.3))}
+}
+@keyframes zyrexLetter{
+ 0%,100%{top:3px;filter:brightness(.96)}
+ 50%{top:-5px;filter:brightness(1.18)}
+}
+@keyframes zyrexShine{
+ 0%,18%{transform:translateX(-130%)}
+ 48%,62%{transform:translateX(130%)}
+ 100%{transform:translateX(130%)}
+}
+@media(hover:hover) and (pointer:fine){
+ .hero-brand-wrap:hover .hero-brand>.hero-letter{color:#fff}
+ .hero-brand-wrap:hover .hero-brand{filter:drop-shadow(0 0 40px rgba(53,224,255,.28))}
+}
+@media(max-width:600px){
+ .hero-brand{transform:perspective(700px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))!important}
+ .hero-brand>.hero-letter{animation-duration:3.8s!important}
+}
+@media(prefers-reduced-motion:reduce){
+ .hero-brand,.hero-brand>.hero-letter,.hero-brand:before{animation:none!important}
+ .hero-brand{transform:none!important}
+}
