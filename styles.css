@@ -136,3 +136,10 @@ body.gfx-page .kicker{font-size:7px;letter-spacing:.15em;color:#686879;margin:0}
 body.gfx-page .card h3{margin:2px 0 0;font-size:12px;line-height:1.25;font-weight:650;color:#c9c9d4;letter-spacing:0}
 @media(max-width:900px){body.gfx-page .grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:600px){.version-badge{right:10px;bottom:10px}body.gfx-page .grid{grid-template-columns:1fr;gap:13px}body.gfx-page .card-body{padding:7px 9px 9px}body.gfx-page .card h3{font-size:11px}}
+
+/* GFX masonry layout: pack variable-height artwork without vertical gaps */
+body.gfx-page .grid{display:block;column-count:3;column-gap:20px}
+body.gfx-page .grid>.card{display:inline-block;width:100%;vertical-align:top;break-inside:avoid;page-break-inside:avoid;margin:0 0 20px}
+body.gfx-page .grid>.empty{display:block;width:100%;margin:0}
+@media(max-width:900px){body.gfx-page .grid{column-count:2;column-gap:14px}body.gfx-page .grid>.card{margin-bottom:14px}}
+@media(max-width:600px){body.gfx-page .grid{column-count:1;column-gap:0}body.gfx-page .grid>.card{margin-bottom:13px}}
