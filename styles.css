@@ -273,3 +273,8 @@ body.gfx-page .card h3{font-size:12px;margin:2px 0 0;color:#cbd3e7}
  .version-badge{right:10px;bottom:10px}.sfx-toggle{right:10px;bottom:45px}
 }
 @media(prefers-reduced-motion:reduce){.card,.btn,.social-btn{transition:none!important}.card:before{display:none}}
+
+/* Lightbox stays clear of the fixed navigation and closes on backdrop click */
+.lightbox{top:76px!important;height:calc(100vh - 76px)!important;inset-inline:0!important;bottom:auto!important;padding:18px 22px!important}
+.lightbox img{max-height:calc(100vh - 112px)!important;max-width:calc(100vw - 44px)!important}
+@media(max-width:600px){.lightbox{top:76px!important;height:calc(100svh - 76px)!important;padding:12px!important}.lightbox img{max-height:calc(100svh - 100px)!important;max-width:calc(100vw - 24px)!important}.lightbox .close{top:10px;right:10px}}
