@@ -108,3 +108,31 @@ body.gfx-page .card-body{padding:9px 12px 11px}
 body.gfx-page .kicker{font-size:8px;letter-spacing:.16em;color:#5f5f5f}
 body.gfx-page .card h3{margin:3px 0 0;font-size:12px;line-height:1.25;font-weight:700;color:#c5c5c5;letter-spacing:0}
 @media(max-width:600px){body.gfx-page .grid{gap:12px}body.gfx-page .card-body{padding:7px 10px 9px}body.gfx-page .kicker{font-size:7px}body.gfx-page .card h3{font-size:11px}body.gfx-page .media img{width:100%;height:auto;object-fit:contain}}
+
+/* --- ZYREXCORE SHOWCASE THEME --- */
+:root{--bg:#07070a;--panel:#0d0d12;--panel2:#12121a;--line:#252532;--text:#f7f7fb;--muted:#858594;--soft:#cfd0dc;--accent:#8f7cff;--accent2:#5ce1e6}
+body{background:radial-gradient(900px 500px at 50% -10%,rgba(143,124,255,.12),transparent 65%),radial-gradient(700px 500px at 100% 30%,rgba(92,225,230,.055),transparent 65%),#07070a}
+body:before{opacity:.11;background-size:42px 42px}
+.version-badge{top:auto;left:auto;right:18px;bottom:16px;z-index:90;color:#858594;background:rgba(10,10,15,.78);border:1px solid #292938;border-radius:999px;padding:6px 10px;font-size:9px;letter-spacing:.12em;box-shadow:0 8px 30px rgba(0,0,0,.3)}
+.nav{height:76px;background:rgba(7,7,10,.82);border-bottom:1px solid rgba(255,255,255,.08);box-shadow:0 10px 35px rgba(0,0,0,.18)}
+.brand{font-size:15px;letter-spacing:.16em}
+.nav-links a.active{color:#fff;background:rgba(143,124,255,.1);border-color:rgba(143,124,255,.28)}
+.nav-links a{padding:8px 11px;border:1px solid transparent;border-radius:9px}
+.social-btn{background:rgba(255,255,255,.025);border-color:rgba(255,255,255,.09)}
+.social-btn:hover{border-color:rgba(143,124,255,.5);background:rgba(143,124,255,.08)}
+.page-hero{padding-top:88px;padding-bottom:42px}
+.page-hero h1{font-weight:900;text-shadow:0 10px 50px rgba(143,124,255,.12)}
+.page-hero p{color:#858594}
+.card{border-color:rgba(255,255,255,.08);background:linear-gradient(145deg,#111119,#0a0a0e);box-shadow:0 14px 45px rgba(0,0,0,.24)}
+.card:hover{transform:translateY(-6px);border-color:rgba(143,124,255,.38);box-shadow:0 20px 65px rgba(0,0,0,.42),0 0 0 1px rgba(143,124,255,.05)}
+/* GFX = artwork first, metadata second */
+body.gfx-page .grid{grid-template-columns:repeat(3,minmax(0,1fr));align-items:start}
+body.gfx-page .card{overflow:hidden}
+body.gfx-page .media{aspect-ratio:auto;height:auto;display:block;background:#060609;padding:0}
+body.gfx-page .media img{width:100%;height:auto;max-height:none;display:block;object-fit:contain;transform:none!important}
+body.gfx-page .card:hover .media img{transform:none!important;filter:brightness(1.04)}
+body.gfx-page .card-body{padding:8px 11px 10px;background:linear-gradient(180deg,#101017,#0c0c11)}
+body.gfx-page .kicker{font-size:7px;letter-spacing:.15em;color:#686879;margin:0}
+body.gfx-page .card h3{margin:2px 0 0;font-size:12px;line-height:1.25;font-weight:650;color:#c9c9d4;letter-spacing:0}
+@media(max-width:900px){body.gfx-page .grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.version-badge{right:10px;bottom:10px}body.gfx-page .grid{grid-template-columns:1fr;gap:13px}body.gfx-page .card-body{padding:7px 9px 9px}body.gfx-page .card h3{font-size:11px}}
