@@ -599,8 +599,8 @@ body:after{
  .hero-moving-lane{height:34px!important;gap:28px!important}
  .hero-moving-lane-a{top:37%!important}
  .hero-moving-lane-b{top:64%!important}
- .hero-moving-lane span{font-size:9px!important;letter-spacing:.13em!important}
- .hero-moving-lane-b span{font-size:7px!important;letter-spacing:.16em!important}
+ .hero-moving-lane span{font-size:18px!important;letter-spacing:.15em!important}
+ .hero-moving-lane-b span{font-size:13px!important;letter-spacing:.18em!important}
  .page-hero{padding:62px 16px 38px!important}
  .wrap{padding:54px 16px!important}
  .section-head{margin-bottom:24px!important}
@@ -730,7 +730,7 @@ body:after{
 @media(max-width:700px){.audio-grid{width:100%}}
 
 
-/* V2.0.14 — MOBILE NAVIGATION DRAWER POLISH */
+/* V2.0.15 — MOBILE NAVIGATION DRAWER POLISH + BIGGER MOBILE MARQUEE */
 .mobile-nav-toggle,.mobile-nav-panel{display:none}
 @media(max-width:600px){
  .nav-right{display:none!important}
