@@ -1,4 +1,4 @@
-const VERSION='V.2.0.7';
+const VERSION='V.2.0.8';
 const SOCIAL={roblox:'https://www.roblox.com/users/4818300014/profile',instagram:'https://www.instagram.com/manvith_1005?igsh=bWppbzBxZWc9emhv',discord:'https://discord.gg/nGqKXKNKsW'};
 const FEEDBACK_ENDPOINT='https://orange-waterfall-e488.linganagoudapatilpatil.workers.dev';
 const esc=s=>String(s??'').replace(/[&<>\"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[c]));
@@ -7,7 +7,7 @@ const gameSlides={};
 function icon(type){if(type==='roblox')return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.2 2.8 21.2 7l-4.2 16-16-4.2 4.2-16Zm3.1 5.1-1.6 6.1 6.1 1.6 1.6-6.1 6.1 1.6Z"/></svg>';if(type==='instagram')return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 0 1 12 7.5Zm0 2A2.5 2.5 0 1 0 14.5 12 2.5 2.5 0 0 0 12 9.5ZM17.3 6.2a1.1 1.1 0 1 1-1.1 1.1 1.1 0 0 1-1.1-1.1Z"/></svg>';return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 5.2A16.5 16.5 0 0 0 15.4 4l-.5 1a15.1 15.1 0 0 0-5.8 0l-.5-1a16.5 16.5 0 0 0-4.1 1.2C1.9 8.2 1.2 11 1.4 13.8A16.7 16.7 0 0 0 6.5 16l1.2-1.5c-.7-.2-1.3-.6-1.9-1 2.4 1.1 5.2 1.6 8.1 1.6s5.7-.5 8.1-1.6c-.6.4-1.2.8-1.9 1l1.2 1.5a16.7 16.7 0 0 0 5.1-2.2c.3-3.3-.6-6.1-4.9-8.6ZM8.2 12.3c-.8 0-1.5-.7-1.5-1.6s.7-1.6 1.5-1.6 1.5.7 1.5 1.6-.7 1.6-1.5 1.6Zm7.6 0c-.8 0-1.5-.7-1.5-1.6s.7-1.6 1.5-1.6 1.5.7 1.5 1.6-.7 1.6-1.5 1.6Z"/></svg>'}
 function feedbackIcon(){return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 4v-4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm3 5h10V7H7v2Zm0 4h7v-2H7v2Z"/></svg>'}
 function socialNav(){return `<div class="socials"><a class="social-btn" href="${SOCIAL.roblox}" target="_blank" rel="noopener">${icon('roblox')}<span>Roblox</span></a><a class="social-btn" href="${SOCIAL.instagram}" target="_blank" rel="noopener">${icon('instagram')}<span>Instagram</span></a><a class="social-btn" href="${SOCIAL.discord}" target="_blank" rel="noopener">${icon('discord')}<span>Discord</span></a><button class="social-btn feedback-btn" type="button" onclick="openFeedback()">${feedbackIcon()}<span>Feedback</span></button></div>`}
-function nav(active=''){return `<header class="nav"><a class="brand" href="index.html">ZYREXCORE</a><div class="nav-right"><nav class="nav-links"><a href="games.html" class="${active==='games'?'active':''}">Games</a><a href="gfx.html" class="${active==='gfx'?'active':''}">GFX</a><a href="models.html" class="${active==='models'?'active':''}">3D Models</a></nav>${socialNav()}</div></header>`}
+function nav(active=''){return `<header class="nav"><a class="brand" href="index.html">ZYREXCORE</a><div class="nav-right"><nav class="nav-links"><a href="games.html" class="${active==='games'?'active':''}">Games</a><a href="gfx.html" class="${active==='gfx'?'active':''}">GFX</a><a href="models.html" class="${active==='models'?'active':''}">3D Models</a><a href="audio.html" class="${active==='audio'?'active':''}">Audio</a></nav>${socialNav()}</div></header>`}
 function feedbackModal(){return `<div class="feedback-overlay" id="feedbackOverlay" aria-hidden="true"><div class="feedback-modal" role="dialog" aria-modal="true" aria-labelledby="feedbackTitle"><button class="feedback-close" type="button" onclick="closeFeedback()" aria-label="Close">×</button><div class="eyebrow">ZYREXCORE // FEEDBACK</div><h2 id="feedbackTitle">Tell me what you think.</h2><p class="feedback-subtitle">Your feedback helps improve the portfolio.</p><form id="feedbackForm" onsubmit="submitFeedback(event)"><label>Discord Username<input id="feedbackDiscord" maxlength="100" autocomplete="off" placeholder="your_discord_username" required></label><label>Roblox Username <span>(not Display Name)</span><input id="feedbackRoblox" maxlength="100" autocomplete="off" placeholder="your_roblox_username" required></label><label>Your Opinion<textarea id="feedbackMessage" maxlength="2000" rows="7" placeholder="Write your feedback, opinion or suggestions..." required></textarea></label><input id="feedbackTrap" class="feedback-trap" tabindex="-1" autocomplete="off"><div class="feedback-status" id="feedbackStatus" aria-live="polite"></div><div class="feedback-actions"><button class="btn" type="button" onclick="closeFeedback()">Cancel</button><button class="btn primary" id="feedbackSubmit" type="submit">Send Feedback →</button></div></form></div></div>`}
 function initKineticHero(){
  const wrap=document.querySelector('.hero-brand-wrap'),brand=document.querySelector('.hero-brand');
@@ -58,20 +58,25 @@ function initKineticHero(){
  tick();
 }
 const AUDIO_ITEMS=[
- {title:'Your Track / Video 01',artist:'YouTube',url:'https://www.youtube.com/watch?v=YOUR_VIDEO_ID'},
- {title:'Your Track / Video 02',artist:'YouTube',url:'https://www.youtube.com/watch?v=YOUR_VIDEO_ID'}
+ {url:'https://www.youtube.com/watch?v=YOUR_VIDEO_ID'}
 ];
 function youtubeId(url){
  const m=String(url||'').match(/(?:youtube\\.com\\/(?:watch\\?v=|embed\\/|shorts\\/)|youtu\\.be\\/)([A-Za-z0-9_-]{6,})/);
  return m?m[1]:'';
 }
-function renderAudio(containerId='audioGrid'){
+async function renderAudio(containerId='audioGrid'){
  const box=document.getElementById(containerId);if(!box)return;
- box.innerHTML=AUDIO_ITEMS.map((item,i)=>{
-  const id=youtubeId(item.url);
-  if(!id)return '';
-  return '<article class="audio-card"><div class="audio-player"><iframe loading="lazy" src="https://www.youtube.com/embed/'+id+'?rel=0&modestbranding=1" title="'+esc(item.title)+'" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div><div class="audio-info"><div><div class="kicker">AUDIO '+String(i+1).padStart(2,'0')+'</div><h3>'+esc(item.title)+'</h3><p>'+esc(item.artist)+'</p></div><a class="btn" href="'+esc(item.url)+'" target="_blank" rel="noopener">YouTube ↗</a></div></article>';
- }).join('');
+ const valid=AUDIO_ITEMS.map((item,i)=>({item,i,id:youtubeId(item.url)})).filter(x=>x.id);
+ box.innerHTML=valid.map(({item,i,id})=>'<article class="audio-card"><div class="audio-player"><iframe loading="lazy" src="https://www.youtube.com/embed/'+id+'?rel=0&modestbranding=1" title="YouTube video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div><div class="audio-info"><div><div class="kicker">AUDIO '+String(i+1).padStart(2,'0')+'</div><h3 class="audio-title" data-video-id="'+id+'">Loading title...</h3><p>YouTube</p></div><a class="btn" href="'+esc(item.url)+'" target="_blank" rel="noopener">YouTube ↗</a></div></article>').join('');
+ await Promise.all([...box.querySelectorAll('.audio-title')].map(async el=>{
+   const id=el.dataset.videoId;
+   try{
+    const r=await fetch('https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v='+encodeURIComponent(id)+'&format=json');
+    if(!r.ok)throw Error();
+    const data=await r.json();
+    el.textContent=data.title||'YouTube Video';
+   }catch{el.textContent='YouTube Video'}
+ }));
 }
 function initPreviewScroll(){if(document.body.classList.contains('gallery-page'))return;document.querySelectorAll('.grid').forEach(grid=>{if(grid.dataset.previewScroll==='1')return;grid.dataset.previewScroll='1';const wrap=document.createElement('div');wrap.className='preview-scroll-wrap';grid.parentNode.insertBefore(wrap,grid);wrap.appendChild(grid);const prev=document.createElement('button');prev.className='preview-scroll-btn preview-scroll-prev';prev.type='button';prev.setAttribute('aria-label','Previous preview');prev.innerHTML='‹';const next=document.createElement('button');next.className='preview-scroll-btn preview-scroll-next';next.type='button';next.setAttribute('aria-label','Next preview');next.innerHTML='›';wrap.append(prev,next);const cards=[...grid.children].filter(el=>el.classList.contains('card'));let index=0;const update=()=>{if(window.innerWidth>600){cards.forEach(c=>c.hidden=false);prev.hidden=true;next.hidden=true;return}cards.forEach((c,i)=>{c.hidden=i!==index});prev.hidden=cards.length<2;next.hidden=cards.length<2;prev.disabled=index<=0;next.disabled=index>=cards.length-1};prev.addEventListener('click',()=>{if(index>0){index--;update()}});next.addEventListener('click',()=>{if(index<cards.length-1){index++;update()}});window.addEventListener('resize',update);update()})}
 function initSharedCardFX(){
