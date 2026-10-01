@@ -12,7 +12,7 @@ function wireHomePreviewLinks(){
 }
 bootChrome();
 document.querySelectorAll('.version-badge').forEach(el=>el.textContent='V.2.0.0');
-renderGames('gamesGrid',3).then(()=>{wireHomePreviewLinks();document.querySelectorAll('.preview-scroll-wrap').forEach(w=>{const g=w.querySelector('.grid');if(g)g.style.transform='translate3d(0,0,0)'})});
+renderGames('gamesGrid',3).then(()=>{wireHomePreviewLinks();});
 renderAssets('gfx','gfxGrid','GFX work').then(()=>{const b=document.getElementById('gfxGrid');[...b.children].slice(3).forEach(x=>x.remove());wireHomePreviewLinks()});
 renderAssets('model','modelsGrid','3D models').then(()=>{const b=document.getElementById('modelsGrid');[...b.children].slice(3).forEach(x=>x.remove());wireHomePreviewLinks()});
 </script></body></html>
