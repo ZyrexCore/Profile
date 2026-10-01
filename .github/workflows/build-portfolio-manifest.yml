@@ -27,8 +27,10 @@ jobs:
           from urllib.request import Request, urlopen
 
           assets=Path('assets')
+          gfx_dir=assets/'GFX'
           entries=[]
-          pattern=re.compile(r'^(gfx|graphic|graphics|model|models)[ _-]*(\d+)\.(png|jpe?g|webp|gif|avif)$',re.I)
+          image_exts={'.png','.jpg','.jpeg','.webp','.gif','.avif','.svg','.bmp'}
+          model_pattern=re.compile(r'^(model|models)[ _-]*(\d+)\.(png|jpe?g|webp|gif|avif)$',re.I)
           links=json.loads(Path('game-links.json').read_text(encoding='utf-8')) if Path('game-links.json').exists() else {}
 
           def get_json(url):
@@ -66,12 +68,20 @@ jobs:
                   entry['title']=meta.get('name') or entry['title']
               entries.append(entry)
 
+          # Every browser-friendly image placed in assets/GFX is automatically shown.
+          # The displayed title is the exact filename without its extension.
+          if gfx_dir.exists():
+              gfx_files=sorted((p for p in gfx_dir.iterdir() if p.is_file() and p.suffix.lower() in image_exts),key=lambda p:p.name.lower())
+              for number,p in enumerate(gfx_files,1):
+                  entries.append({'type':'gfx','number':number,'title':p.stem,'file':p.relative_to(assets).as_posix()})
+
+          # Keep the existing numbered model-image behavior in the assets root.
           for p in sorted(assets.iterdir(),key=lambda x:x.name.lower()):
               if not p.is_file():continue
-              m=pattern.match(p.name)
+              m=model_pattern.match(p.name)
               if not m:continue
-              prefix,number,_=m.groups();number=int(number);typ='gfx' if prefix.lower().startswith(('gfx','graphic')) else 'model'
-              entries.append({'type':typ,'number':number,'title':f'{"GFX" if typ=="gfx" else "Model"} {number}','file':p.name})
+              _,number,_=m.groups();number=int(number)
+              entries.append({'type':'model','number':number,'title':f'Model {number}','file':p.name})
 
           entries.sort(key=lambda x:(x['type'],x['number']))
           Path('portfolio-manifest.json').write_text(json.dumps(entries,indent=2,ensure_ascii=False),encoding='utf-8')
