@@ -282,3 +282,78 @@ body:after{display:none!important}
 .hero-brand:before,.hero-brand:after{display:none!important}
 .hero-brand{animation:none!important;transform:none!important}
 .hero-brand-wrap:before,.hero-brand-wrap:after{display:none!important}
+
+/* HERO V2 interactive motion — moving typography behind the logo */
+.hero-brand-wrap{
+ overflow:visible!important;
+ isolation:isolate!important;
+ perspective:900px;
+}
+.hero-brand-wrap:before,
+.hero-brand-wrap:after{
+ display:block!important;
+ content:"ZYREXCORE  •  CREATE  •  BUILD  •  ZYREXCORE  •  CREATE  •  BUILD  •  "!important;
+ position:absolute!important;
+ top:50%!important;
+ left:50%!important;
+ right:auto!important;
+ width:100vw!important;
+ height:auto!important;
+ border:0!important;
+ background:none!important;
+ color:rgba(142,232,255,.075)!important;
+ font-size:clamp(18px,3vw,42px)!important;
+ font-weight:900!important;
+ letter-spacing:.24em!important;
+ line-height:1!important;
+ white-space:nowrap!important;
+ pointer-events:none!important;
+ z-index:-1!important;
+ opacity:1!important;
+ transform:translate(-50%,-50%) translateX(-100vw)!important;
+ animation:zyrexBehindA 15s linear infinite!important;
+}
+.hero-brand-wrap:after{
+ content:"MANVITH PATIL  •  ROBLOX  •  GFX  •  3D  •  CREATE  •  "!important;
+ color:rgba(255,119,226,.06)!important;
+ font-size:clamp(12px,2vw,28px)!important;
+ letter-spacing:.32em!important;
+ animation:zyrexBehindB 19s linear infinite!important;
+ transform:translate(-50%,-50%) translateX(100vw)!important;
+}
+.hero-brand{
+ position:relative!important;
+ z-index:2!important;
+ transform:translateZ(0)!important;
+ animation:zyrexLogoFloat 4s ease-in-out infinite!important;
+}
+.hero-brand .hero-letter{
+ display:inline-block!important;
+ animation:zyrexLetterFloat 3.6s ease-in-out infinite!important;
+ animation-delay:calc(var(--i)*-.12s)!important;
+}
+.hero-brand .hero-letter:nth-child(2n){animation-delay:calc(var(--i)*-.12s - .45s)!important}
+.hero-brand .hero-letter:nth-child(3n){animation-delay:calc(var(--i)*-.12s - .9s)!important}
+@keyframes zyrexBehindA{
+ 0%{transform:translate(-50%,-50%) translateX(-105vw)}
+ 100%{transform:translate(-50%,-50%) translateX(105vw)}
+}
+@keyframes zyrexBehindB{
+ 0%{transform:translate(-50%,-50%) translateX(105vw)}
+ 100%{transform:translate(-50%,-50%) translateX(-105vw)}
+}
+@keyframes zyrexLogoFloat{
+ 0%,100%{transform:translate3d(0,0,0) scale(1)}
+ 50%{transform:translate3d(0,-5px,0) scale(1.012)}
+}
+@keyframes zyrexLetterFloat{
+ 0%,100%{transform:translateY(4px);filter:brightness(.98)}
+ 50%{transform:translateY(-7px);filter:brightness(1.12)}
+}
+@media(max-width:600px){
+ .hero-brand-wrap:before,.hero-brand-wrap:after{font-size:10px!important;letter-spacing:.16em!important}
+ .hero-brand{animation:zyrexLogoFloat 4.5s ease-in-out infinite!important}
+}
+@media(prefers-reduced-motion:reduce){
+ .hero-brand,.hero-brand .hero-letter,.hero-brand-wrap:before,.hero-brand-wrap:after{animation:none!important}
+}
