@@ -148,7 +148,6 @@ body.gfx-page .grid>.empty{display:block;width:100%;margin:0}
 /* === ARCADE ARTIST UI === */
 :root{--bg:#070914;--panel:#0c1020;--panel2:#11172a;--line:#28314c;--text:#f5f7ff;--muted:#8791ad;--accent:#7c5cff;--cyan:#4de8ff;--pink:#ff4fd8}
 body{background:radial-gradient(700px 420px at 15% 0,rgba(124,92,255,.16),transparent 65%),radial-gradient(700px 500px at 90% 15%,rgba(77,232,255,.10),transparent 65%),#070914}
-body:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:30;opacity:.035;background:repeating-linear-gradient(0deg,#fff 0,#fff 1px,transparent 1px,transparent 4px)}
 .nav{background:rgba(7,9,20,.72);border-bottom:1px solid rgba(124,92,255,.22);box-shadow:0 0 40px rgba(0,0,0,.3)}
 .brand{color:#fff;text-shadow:0 0 18px rgba(124,92,255,.45)}
 .nav-links a.active{color:#fff;background:linear-gradient(135deg,rgba(124,92,255,.18),rgba(77,232,255,.08));border-color:rgba(124,92,255,.38);box-shadow:0 0 18px rgba(124,92,255,.1)}
@@ -196,7 +195,6 @@ body{
  color:var(--ink)
 }
 body:before{opacity:.08;background-size:44px 44px}
-body:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:80;opacity:.025;background:repeating-linear-gradient(0deg,rgba(255,255,255,.7) 0,rgba(255,255,255,.7) 1px,transparent 1px,transparent 5px)}
 .nav{
  position:fixed!important;top:0;left:0;right:0;width:100%;height:76px;
  padding:0 clamp(16px,5vw,80px);background:rgba(6,8,22,.78);
@@ -278,3 +276,9 @@ body.gfx-page .card h3{font-size:12px;margin:2px 0 0;color:#cbd3e7}
 .lightbox{top:76px!important;height:calc(100vh - 76px)!important;inset-inline:0!important;bottom:auto!important;padding:18px 22px!important}
 .lightbox img{max-height:calc(100vh - 112px)!important;max-width:calc(100vw - 44px)!important}
 @media(max-width:600px){.lightbox{top:76px!important;height:calc(100svh - 76px)!important;padding:12px!important}.lightbox img{max-height:calc(100svh - 100px)!important;max-width:calc(100vw - 24px)!important}.lightbox .close{top:10px;right:10px}}
+
+/* V2 cleanup: no decorative scanlines */
+body:after{display:none!important}
+.hero-brand:before,.hero-brand:after{display:none!important}
+.hero-brand{animation:none!important;transform:none!important}
+.hero-brand-wrap:before,.hero-brand-wrap:after{display:none!important}
