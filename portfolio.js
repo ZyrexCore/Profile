@@ -1,4 +1,4 @@
-const VERSION='V.2.0.0';
+const VERSION='V.2.0.1';
 const SOCIAL={roblox:'https://www.roblox.com/users/4818300014/profile',instagram:'https://www.instagram.com/manvith_1005?igsh=bWppbzBxZWc9emhv',discord:'https://discord.gg/nGqKXKNKsW'};
 const FEEDBACK_ENDPOINT='https://orange-waterfall-e488.linganagoudapatilpatil.workers.dev';
 const esc=s=>String(s??'').replace(/[&<>\"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[c]));
@@ -15,24 +15,47 @@ function initKineticHero(){
  wrap.dataset.heroInteractive='1';
  const letters=[...brand.querySelectorAll(':scope > span')];
  letters.forEach((el,i)=>{el.classList.add('hero-letter');el.style.setProperty('--i',i)});
- const makeLane=(text,cls,dir)=>{const lane=document.createElement('div');lane.className='hero-moving-lane '+cls;lane.setAttribute('aria-hidden','true');lane.innerHTML='<span>'+text+'</span><span>'+text+'</span><span>'+text+'</span>';lane.dataset.dir=dir;wrap.insertBefore(lane,brand);return lane};
- makeLane('ZYREXCORE  •  CREATE  •  BUILD  •  ZYREXCORE  •  CREATE  •  BUILD  •  ','hero-moving-lane-a','left');
- makeLane('MANVITH PATIL  •  ROBLOX  •  GFX  •  3D  •  CREATE  •  BUILD  •  ','hero-moving-lane-b','right');
+ const makeLane=(text,cls,dir)=>{
+   const lane=document.createElement('div');
+   lane.className='hero-moving-lane '+cls;
+   lane.setAttribute('aria-hidden','true');
+   lane.innerHTML='<span>'+text+'</span><span>'+text+'</span><span>'+text+'</span><span>'+text+'</span>';
+   lane.dataset.dir=dir;
+   wrap.insertBefore(lane,brand);
+   return lane;
+ };
+ makeLane('ZYREXCORE  /  CREATE  /  BUILD  /  DESIGN  /  ZYREXCORE  /  CREATE  /  BUILD  /  ','hero-moving-lane-a','left');
+ makeLane('MANVITH PATIL  /  ROBLOX  /  GFX  /  3D  /  CREATE  /  BUILD  /  MANVITH PATIL  /  ','hero-moving-lane-b','right');
+
+ let targetX=0,targetY=0,currentX=0,currentY=0;
  const move=(x,y)=>{
-   const r=wrap.getBoundingClientRect(),mx=(x-r.left)/r.width-.5,my=(y-r.top)/r.height-.5;
-   brand.style.setProperty('--rx',(-my*8).toFixed(2)+'deg');
-   brand.style.setProperty('--ry',(mx*10).toFixed(2)+'deg');
-   letters.forEach((el,i)=>{
-     const spread=(i-(letters.length-1)/2)/(letters.length-1||1);
-     el.style.setProperty('--lx',(mx*spread*10).toFixed(2)+'px');
-     el.style.setProperty('--ly',(my*spread*7).toFixed(2)+'px');
-   });
+   const r=wrap.getBoundingClientRect();
+   targetX=Math.max(-.5,Math.min(.5,(x-r.left)/r.width-.5));
+   targetY=Math.max(-.5,Math.min(.5,(y-r.top)/r.height-.5));
+   wrap.style.setProperty('--glow-x',((targetX+.5)*100).toFixed(1)+'%');
+   wrap.style.setProperty('--glow-y',((targetY+.5)*100).toFixed(1)+'%');
+ };
+ const reset=()=>{
+   targetX=0;targetY=0;
+   wrap.style.setProperty('--glow-x','50%');
+   wrap.style.setProperty('--glow-y','50%');
  };
  wrap.addEventListener('pointermove',e=>move(e.clientX,e.clientY),{passive:true});
- wrap.addEventListener('pointerleave',()=>{
-   brand.style.setProperty('--rx','0deg');brand.style.setProperty('--ry','0deg');
-   letters.forEach(el=>{el.style.setProperty('--lx','0px');el.style.setProperty('--ly','0px')});
- },{passive:true});
+ wrap.addEventListener('pointerleave',reset,{passive:true});
+
+ const tick=()=>{
+   currentX+=(targetX-currentX)*.085;
+   currentY+=(targetY-currentY)*.085;
+   brand.style.setProperty('--rx',(-currentY*7).toFixed(2)+'deg');
+   brand.style.setProperty('--ry',(currentX*11).toFixed(2)+'deg');
+   letters.forEach((el,i)=>{
+     const spread=(i-(letters.length-1)/2)/(letters.length-1||1);
+     el.style.setProperty('--lx',(currentX*spread*7).toFixed(2)+'px');
+     el.style.setProperty('--ly',(currentY*spread*5).toFixed(2)+'px');
+   });
+   requestAnimationFrame(tick);
+ };
+ tick();
 }
 function initPreviewScroll(){if(document.body.classList.contains('gallery-page'))return;document.querySelectorAll('.grid').forEach(grid=>{if(grid.dataset.previewScroll==='1')return;grid.dataset.previewScroll='1';const wrap=document.createElement('div');wrap.className='preview-scroll-wrap';grid.parentNode.insertBefore(wrap,grid);wrap.appendChild(grid);const prev=document.createElement('button');prev.className='preview-scroll-btn preview-scroll-prev';prev.type='button';prev.setAttribute('aria-label','Previous preview');prev.innerHTML='‹';const next=document.createElement('button');next.className='preview-scroll-btn preview-scroll-next';next.type='button';next.setAttribute('aria-label','Next preview');next.innerHTML='›';wrap.append(prev,next);const cards=[...grid.children].filter(el=>el.classList.contains('card'));let index=0;const update=()=>{if(window.innerWidth>600){cards.forEach(c=>c.hidden=false);prev.hidden=true;next.hidden=true;return}cards.forEach((c,i)=>{c.hidden=i!==index});prev.hidden=cards.length<2;next.hidden=cards.length<2;prev.disabled=index<=0;next.disabled=index>=cards.length-1};prev.addEventListener('click',()=>{if(index>0){index--;update()}});next.addEventListener('click',()=>{if(index<cards.length-1){index++;update()}});window.addEventListener('resize',update);update()})}
 function bootChrome(active){if(!document.querySelector('.version-badge'))document.body.insertAdjacentHTML('afterbegin',`<div class="version-badge" aria-label="Portfolio version">${VERSION}</div>`);document.body.insertAdjacentHTML('afterbegin',`<div class="cursor-light" id="cursorLight"></div>`+nav(active));document.body.insertAdjacentHTML('beforeend','<div class="lightbox" id="lightbox"><button class="close" onclick="closeLightbox()">Close ✕</button><img id="lightboxImg" alt="Preview"></div>'+feedbackModal()+'<div class="feedback-toast" id="feedbackToast" role="status" aria-live="polite"></div>');initKineticHero();initPreviewScroll();initSFX();if(document.body.classList.contains('gfx-page'))initGfxMasonry();const c=document.getElementById('cursorLight');
