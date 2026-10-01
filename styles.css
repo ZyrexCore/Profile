@@ -273,3 +273,45 @@ body.gfx-page .card h3{font-size:12px;margin:2px 0 0;color:#cbd3e7}
 @media(prefers-reduced-motion:reduce){
  .hero-moving-lane-a,.hero-moving-lane-b{animation:none!important}
 }
+
+
+/* V2.0.2 SITE-WIDE VISUAL SYSTEM — shared gallery palette */
+:root{
+ --violet:#66738a;
+ --cyan:#b7c3d6;
+ --pink:#8996aa;
+}
+body{
+ background:
+  radial-gradient(900px 520px at 50% -15%,rgba(126,143,168,.11),transparent 65%),
+  radial-gradient(700px 500px at 100% 20%,rgba(104,122,148,.055),transparent 65%),
+  var(--bg);
+}
+.nav-links a:after{background:#b7c3d6}
+.sfx-toggle:hover{border-color:#b7c3d6}
+.feedback-modal input:focus,.feedback-modal textarea:focus{box-shadow:0 0 0 3px rgba(183,195,214,.055)}
+
+.hero-brand-wrap:before{
+ border-color:rgba(190,204,224,.16)!important;
+ background:radial-gradient(circle at var(--glow-x) var(--glow-y),rgba(183,195,214,.10),transparent 30%)!important;
+ box-shadow:inset 0 0 28px rgba(183,195,214,.018),0 0 24px rgba(183,195,214,.028)!important;
+}
+.hero-brand-wrap:after{
+ border-color:rgba(145,158,178,.09)!important;
+ background:radial-gradient(circle at var(--glow-x) var(--glow-y),rgba(145,158,178,.055),transparent 24%)!important;
+}
+.hero-brand-wrap:hover:before{
+ box-shadow:inset 0 0 32px rgba(183,195,214,.035),0 0 34px rgba(183,195,214,.065)!important;
+}
+.hero-moving-lane span{
+ color:rgba(190,204,224,.105)!important;
+ text-shadow:0 0 22px rgba(183,195,214,.055)!important;
+}
+.hero-moving-lane-b span{
+ color:rgba(160,174,196,.09)!important;
+ text-shadow:0 0 18px rgba(160,174,196,.045)!important;
+}
+.cursor-trail{
+ background:rgba(195,207,225,.34)!important;
+ box-shadow:0 0 9px rgba(183,195,214,.13)!important;
+}
