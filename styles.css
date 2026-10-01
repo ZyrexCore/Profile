@@ -437,3 +437,56 @@ body:after{display:none!important}
  .feedback-modal h2{font-size:30px}
  .feedback-modal input,.feedback-modal textarea{font-size:16px}
 }
+
+/* HERO FINAL POLISH */
+.hero-brand{
+ filter:none!important;
+ text-shadow:0 0 12px rgba(255,255,255,.12),0 0 28px rgba(139,92,246,.08)!important;
+}
+.hero-brand:after{
+ display:none!important;
+}
+.hero-brand:before{
+ inset:-10% -4%!important;
+ z-index:4!important;
+ opacity:.38!important;
+}
+.hero-brand-wrap:before{
+ content:"ZYREXCORE  •  CREATE  •  BUILD  •  ZYREXCORE  •  CREATE  •  BUILD  •  "!important;
+ color:rgba(142,232,255,.12)!important;
+ filter:none!important;
+ text-shadow:none!important;
+}
+.hero-brand-wrap:after{
+ content:"MANVITH PATIL  •  ROBLOX  •  GFX  •  3D  •  CREATE  •  BUILD  •  "!important;
+ color:rgba(255,119,226,.09)!important;
+ filter:none!important;
+ text-shadow:none!important;
+}
+.cursor-light{
+ width:120px!important;
+ height:120px!important;
+ background:radial-gradient(circle,rgba(255,255,255,.025),transparent 68%)!important;
+}
+.cursor-trail{
+ position:fixed;
+ left:0;
+ top:0;
+ width:8px;
+ height:8px;
+ margin:-4px 0 0 -4px;
+ border-radius:50%;
+ pointer-events:none;
+ z-index:9999;
+ background:rgba(77,232,255,.32);
+ box-shadow:0 0 10px rgba(77,232,255,.16);
+ opacity:calc(.42 - var(--n)*.035);
+ will-change:transform;
+}
+@media(max-width:600px){
+ .cursor-light{display:none!important}
+ .cursor-trail{width:6px;height:6px;margin:-3px 0 0 -3px}
+}
+@media(prefers-reduced-motion:reduce){
+ .cursor-trail{display:none!important}
+}
