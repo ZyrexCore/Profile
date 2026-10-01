@@ -611,3 +611,38 @@ body:after{
 @media(prefers-reduced-motion:reduce){
  .hero-moving-lane-a,.hero-moving-lane-b{animation:zyrexMarqueeLeft 18s linear infinite!important}
 }
+
+
+/* V2.0.6 — HERO MARQUEE + VERSION PLACEMENT */
+.version-badge{
+ left:auto!important;
+ right:16px!important;
+ bottom:14px!important;
+}
+.sfx-toggle{
+ right:16px!important;
+ bottom:58px!important;
+}
+.hero-moving-lane{
+ will-change:transform!important;
+}
+.hero-moving-lane-a{
+ animation:zyrexMarqueeLeft 14s linear infinite!important;
+}
+.hero-moving-lane-b{
+ animation:zyrexMarqueeRight 18s linear infinite!important;
+}
+@keyframes zyrexMarqueeLeft{
+ 0%{transform:translate3d(-50%,-50%,0)}
+ 100%{transform:translate3d(-150%,-50%,0)}
+}
+@keyframes zyrexMarqueeRight{
+ 0%{transform:translate3d(-150%,-50%,0)}
+ 100%{transform:translate3d(-50%,-50%,0)}
+}
+@media(max-width:600px){
+ .version-badge{right:10px!important;bottom:10px!important}
+ .sfx-toggle{right:10px!important;bottom:50px!important}
+ .hero-moving-lane-a{animation-duration:12s!important}
+ .hero-moving-lane-b{animation-duration:15s!important}
+}
