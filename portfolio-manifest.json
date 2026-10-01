@@ -96,6 +96,18 @@
   {
     "type": "gfx",
     "number": 10,
+    "title": "Mudhra",
+    "file": "GFX/Mudhra.jpg"
+  },
+  {
+    "type": "gfx",
+    "number": 11,
+    "title": "Mudhra2.0",
+    "file": "GFX/Mudhra2.0.jpg"
+  },
+  {
+    "type": "gfx",
+    "number": 12,
     "title": "sPORTS dAY",
     "file": "GFX/sPORTS dAY.png"
   }
