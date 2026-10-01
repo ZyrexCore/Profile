@@ -38,29 +38,5 @@
     ],
     "name": "Testing Server 1",
     "universeId": 7709902819
-  },
-  {
-    "type": "gfx",
-    "number": 1,
-    "title": "GFX 1",
-    "file": "gfx1.png"
-  },
-  {
-    "type": "gfx",
-    "number": 2,
-    "title": "GFX 2",
-    "file": "gfx2.png"
-  },
-  {
-    "type": "gfx",
-    "number": 3,
-    "title": "GFX 3",
-    "file": "gfx3.png"
-  },
-  {
-    "type": "gfx",
-    "number": 4,
-    "title": "GFX 4",
-    "file": "gfx4.png"
   }
 ]
