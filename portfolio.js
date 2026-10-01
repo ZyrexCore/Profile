@@ -1,4 +1,4 @@
-const VERSION='V.2.0.2';
+const VERSION='V.2.0.3';
 const SOCIAL={roblox:'https://www.roblox.com/users/4818300014/profile',instagram:'https://www.instagram.com/manvith_1005?igsh=bWppbzBxZWc9emhv',discord:'https://discord.gg/nGqKXKNKsW'};
 const FEEDBACK_ENDPOINT='https://orange-waterfall-e488.linganagoudapatilpatil.workers.dev';
 const esc=s=>String(s??'').replace(/[&<>\"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[c]));
@@ -58,7 +58,38 @@ function initKineticHero(){
  tick();
 }
 function initPreviewScroll(){if(document.body.classList.contains('gallery-page'))return;document.querySelectorAll('.grid').forEach(grid=>{if(grid.dataset.previewScroll==='1')return;grid.dataset.previewScroll='1';const wrap=document.createElement('div');wrap.className='preview-scroll-wrap';grid.parentNode.insertBefore(wrap,grid);wrap.appendChild(grid);const prev=document.createElement('button');prev.className='preview-scroll-btn preview-scroll-prev';prev.type='button';prev.setAttribute('aria-label','Previous preview');prev.innerHTML='‹';const next=document.createElement('button');next.className='preview-scroll-btn preview-scroll-next';next.type='button';next.setAttribute('aria-label','Next preview');next.innerHTML='›';wrap.append(prev,next);const cards=[...grid.children].filter(el=>el.classList.contains('card'));let index=0;const update=()=>{if(window.innerWidth>600){cards.forEach(c=>c.hidden=false);prev.hidden=true;next.hidden=true;return}cards.forEach((c,i)=>{c.hidden=i!==index});prev.hidden=cards.length<2;next.hidden=cards.length<2;prev.disabled=index<=0;next.disabled=index>=cards.length-1};prev.addEventListener('click',()=>{if(index>0){index--;update()}});next.addEventListener('click',()=>{if(index<cards.length-1){index++;update()}});window.addEventListener('resize',update);update()})}
-function bootChrome(active){if(!document.querySelector('.version-badge'))document.body.insertAdjacentHTML('afterbegin',`<div class="version-badge" aria-label="Portfolio version">${VERSION}</div>`);document.body.insertAdjacentHTML('afterbegin',`<div class="cursor-light" id="cursorLight"></div>`+nav(active));document.body.insertAdjacentHTML('beforeend','<div class="lightbox" id="lightbox"><button class="close" onclick="closeLightbox()">Close ✕</button><img id="lightboxImg" alt="Preview"></div>'+feedbackModal()+'<div class="feedback-toast" id="feedbackToast" role="status" aria-live="polite"></div>');initKineticHero();initPreviewScroll();initSFX();if(document.body.classList.contains('gfx-page'))initGfxMasonry();const c=document.getElementById('cursorLight');
+function initSharedCardFX(){
+ if(window.__zyrexCardFX)return;
+ window.__zyrexCardFX=true;
+ const cards=[...document.querySelectorAll('.card')];
+ cards.forEach(card=>{
+  let tx=0,ty=0,cx=0,cy=0,raf=0,inside=false;
+  const move=e=>{
+   const r=card.getBoundingClientRect();
+   const x=(e.clientX-r.left)/r.width-.5;
+   const y=(e.clientY-r.top)/r.height-.5;
+   tx=Math.max(-.5,Math.min(.5,x));ty=Math.max(-.5,Math.min(.5,y));
+   card.style.setProperty('--mx',((tx+.5)*100)+'%');
+   card.style.setProperty('--my',((ty+.5)*100)+'%');
+   inside=true;
+  };
+  const reset=()=>{tx=0;ty=0;inside=false};
+  const tick=()=>{
+   cx+=(tx-cx)*.12;cy+=(ty-cy)*.12;
+   if(inside){
+    card.style.transform='perspective(900px) rotateX('+(-cy*3.5).toFixed(2)+'deg) rotateY('+(cx*5).toFixed(2)+'deg) translate3d(0,-4px,0)';
+   }else{
+    cx*=.88;cy*=.88;
+    card.style.transform='perspective(900px) rotateX('+(-cy*3.5).toFixed(2)+'deg) rotateY('+(cx*5).toFixed(2)+'deg) translate3d(0,0,0)';
+   }
+   raf=requestAnimationFrame(tick);
+  };
+  card.addEventListener('pointermove',move,{passive:true});
+  card.addEventListener('pointerleave',reset,{passive:true});
+  tick();
+ });
+}
+function bootChrome(active){if(!document.querySelector('.version-badge'))document.body.insertAdjacentHTML('afterbegin',`<div class="version-badge" aria-label="Portfolio version">${VERSION}</div>`);document.body.insertAdjacentHTML('afterbegin',`<div class="cursor-light" id="cursorLight"></div>`+nav(active));document.body.insertAdjacentHTML('beforeend','<div class="lightbox" id="lightbox"><button class="close" onclick="closeLightbox()">Close ✕</button><img id="lightboxImg" alt="Preview"></div>'+feedbackModal()+'<div class="feedback-toast" id="feedbackToast" role="status" aria-live="polite"></div>');initKineticHero();initSharedCardFX();initPreviewScroll();initSFX();if(document.body.classList.contains('gfx-page'))initGfxMasonry();const c=document.getElementById('cursorLight');
  let mx=0,my=0,trail=[];
  const pointer=(x,y)=>{mx=x;my=y;if(c){c.style.left=x+'px';c.style.top=y+'px'}};
  window.addEventListener('pointermove',e=>pointer(e.clientX,e.clientY),{passive:true});
