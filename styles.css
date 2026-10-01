@@ -23,7 +23,7 @@ body.modal-open{overflow:hidden}
 .eyebrow{font-size:11px;font-weight:800;letter-spacing:.24em;color:#778198;text-transform:uppercase}
 .hero-eyebrow{display:flex;justify-content:center;gap:24px;flex-wrap:wrap}
 .hero-brand-wrap{position:relative;display:inline-block;margin:42px auto 34px;isolation:isolate;perspective:1000px;overflow:hidden}
-.hero-brand{position:relative;z-index:3;margin:0;font-size:clamp(70px,13vw,170px);line-height:.82;font-weight:900;letter-spacing:-.075em;color:#f5f7ff;transform:perspective(1000px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transform-style:preserve-3d;transition:transform .12s cubic-bezier(.2,.8,.2,1)}
+.hero-brand{position:relative;z-index:3;margin:0;font-size:clamp(60px,11vw,145px);line-height:.82;font-weight:900;letter-spacing:-.075em;white-space:nowrap;color:#f5f7ff;transform:perspective(1000px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transform-style:preserve-3d;transition:transform .12s cubic-bezier(.2,.8,.2,1)}
 .hero-brand:before,.hero-brand:after,.hero-brand-wrap:before,.hero-brand-wrap:after{display:none!important;content:none!important}
 .hero-letter{display:inline-block;position:relative;transform:translate3d(var(--lx,0px),var(--ly,0px),0);animation:heroLetter 3.8s ease-in-out infinite;animation-delay:calc(var(--i)*-.16s);will-change:transform}
 @keyframes heroLetter{0%,100%{top:2px}50%{top:-3px}}
@@ -124,7 +124,7 @@ body.gfx-page .card h3{font-size:12px;margin:2px 0 0;color:#cbd3e7}
  .hero{min-height:auto;padding:48px 16px 78px}
  .hero-eyebrow{gap:8px 16px}
  .hero-brand-wrap{margin:34px auto 28px;max-width:100%;overflow:hidden}
- .hero-brand{font-size:clamp(54px,17vw,88px)}
+ .hero-brand{font-size:clamp(44px,15.5vw,78px);white-space:nowrap}
  .hero-moving-lane{height:32px;gap:30px}
  .hero-moving-lane span{font-size:10px;letter-spacing:.14em}
  .hero-moving-lane-b{top:65%}
@@ -595,7 +595,7 @@ body:after{
 }
 @media(max-width:600px){
  .hero{padding:54px 16px 76px!important}
- .hero-brand-wrap{margin:38px auto 30px!important}
+ .hero-brand-wrap{margin:38px auto 30px!important;display:block;width:fit-content;max-width:100%}
  .hero-moving-lane{height:34px!important;gap:28px!important}
  .hero-moving-lane-a{top:37%!important}
  .hero-moving-lane-b{top:64%!important}
@@ -730,7 +730,7 @@ body:after{
 @media(max-width:700px){.audio-grid{width:100%}}
 
 
-/* V2.0.15 — MOBILE NAVIGATION DRAWER POLISH + BIGGER MOBILE MARQUEE */
+/* V2.0.16 — SINGLE-LINE HERO BRAND + MOBILE MARQUEE */
 .mobile-nav-toggle,.mobile-nav-panel{display:none}
 @media(max-width:600px){
  .nav-right{display:none!important}
