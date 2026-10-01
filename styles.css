@@ -173,3 +173,9 @@ body.gfx-page .card h3{font-size:11px;margin:2px 0 0}
 .sfx-toggle{position:fixed;right:18px;bottom:58px;z-index:91;border:1px solid #303a5a;border-radius:999px;background:rgba(8,12,25,.82);color:#9aa6c5;padding:6px 9px;font:800 9px Inter,sans-serif;letter-spacing:.12em;cursor:pointer;backdrop-filter:blur(12px);transition:.2s}
 .sfx-toggle:hover{color:#fff;border-color:#4de8ff;box-shadow:0 0 18px rgba(77,232,255,.14)}
 @media(max-width:600px){.sfx-toggle{right:10px;bottom:47px;font-size:8px}}
+
+
+/* Fixed top navigation */
+.nav{position:fixed!important;top:0;left:0;right:0;width:100%;z-index:100}
+body{padding-top:76px}
+@media(max-width:600px){body{padding-top:76px}.nav{position:fixed!important}}
