@@ -423,3 +423,17 @@ body:after{display:none!important}
  .hero-brand,.hero-brand>.hero-letter,.hero-brand:before{animation:none!important}
  .hero-brand{transform:none!important}
 }
+
+/* Feedback modal V2 fix */
+.feedback-overlay{z-index:300!important;isolation:isolate}
+.feedback-modal{z-index:301!important;width:min(620px,calc(100vw - 32px));max-height:min(90svh,820px);overflow-y:auto;overscroll-behavior:contain}
+.feedback-close{z-index:302}
+.feedback-modal form{position:relative;z-index:1}
+.feedback-actions{position:relative;z-index:2}
+.feedback-overlay.open{pointer-events:auto}
+@media(max-width:600px){
+ .feedback-overlay{padding:12px!important;align-items:center}
+ .feedback-modal{width:100%;max-height:calc(100svh - 24px);padding:24px 16px!important;border-radius:18px}
+ .feedback-modal h2{font-size:30px}
+ .feedback-modal input,.feedback-modal textarea{font-size:16px}
+}
