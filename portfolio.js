@@ -11,20 +11,46 @@ function nav(active=''){return `<header class="nav"><a class="brand" href="index
 function feedbackModal(){return `<div class="feedback-overlay" id="feedbackOverlay" aria-hidden="true"><div class="feedback-modal" role="dialog" aria-modal="true" aria-labelledby="feedbackTitle"><button class="feedback-close" type="button" onclick="closeFeedback()" aria-label="Close">×</button><div class="eyebrow">ZYREXCORE // FEEDBACK</div><h2 id="feedbackTitle">Tell me what you think.</h2><p class="feedback-subtitle">Your feedback helps improve the portfolio.</p><form id="feedbackForm" onsubmit="submitFeedback(event)"><label>Discord Username<input id="feedbackDiscord" maxlength="100" autocomplete="off" placeholder="your_discord_username" required></label><label>Roblox Username <span>(not Display Name)</span><input id="feedbackRoblox" maxlength="100" autocomplete="off" placeholder="your_roblox_username" required></label><label>Your Opinion<textarea id="feedbackMessage" maxlength="2000" rows="7" placeholder="Write your feedback, opinion or suggestions..." required></textarea></label><input id="feedbackTrap" class="feedback-trap" tabindex="-1" autocomplete="off"><div class="feedback-status" id="feedbackStatus" aria-live="polite"></div><div class="feedback-actions"><button class="btn" type="button" onclick="closeFeedback()">Cancel</button><button class="btn primary" id="feedbackSubmit" type="submit">Send Feedback →</button></div></form></div></div>`}
 function initKineticHero(){
  const wrap=document.querySelector('.hero-brand-wrap'),brand=document.querySelector('.hero-brand');
- if(!wrap||!brand||wrap.dataset.heroInteractive==='1')return;wrap.dataset.heroInteractive='1';
+ if(!wrap||!brand||wrap.dataset.heroInteractive==='1')return;
+ wrap.dataset.heroInteractive='1';
  const letters=[...brand.querySelectorAll(':scope > span')];
  letters.forEach((el,i)=>{el.classList.add('hero-letter');el.style.setProperty('--i',i)});
- const move=(x,y)=>{const r=wrap.getBoundingClientRect(),mx=(x-r.left)/r.width-.5,my=(y-r.top)/r.height-.5;wrap.style.setProperty('--mx',mx.toFixed(3));wrap.style.setProperty('--my',my.toFixed(3));brand.style.setProperty('--rx',(-my*7).toFixed(2)+'deg');brand.style.setProperty('--ry',(mx*9).toFixed(2)+'deg');letters.forEach((el,i)=>{const spread=(i-(letters.length-1)/2)/letters.length;el.style.setProperty('--lx',(mx*spread*28).toFixed(2)+'px');el.style.setProperty('--ly',(my*spread*20).toFixed(2)+'px')})};
+ const makeLane=(text,cls,dir)=>{const lane=document.createElement('div');lane.className='hero-moving-lane '+cls;lane.setAttribute('aria-hidden','true');lane.innerHTML='<span>'+text+'</span><span>'+text+'</span><span>'+text+'</span>';lane.dataset.dir=dir;wrap.insertBefore(lane,brand);return lane};
+ makeLane('ZYREXCORE  •  CREATE  •  BUILD  •  ZYREXCORE  •  CREATE  •  BUILD  •  ','hero-moving-lane-a','left');
+ makeLane('MANVITH PATIL  •  ROBLOX  •  GFX  •  3D  •  CREATE  •  BUILD  •  ','hero-moving-lane-b','right');
+ const move=(x,y)=>{
+   const r=wrap.getBoundingClientRect(),mx=(x-r.left)/r.width-.5,my=(y-r.top)/r.height-.5;
+   brand.style.setProperty('--rx',(-my*8).toFixed(2)+'deg');
+   brand.style.setProperty('--ry',(mx*10).toFixed(2)+'deg');
+   letters.forEach((el,i)=>{
+     const spread=(i-(letters.length-1)/2)/(letters.length-1||1);
+     el.style.setProperty('--lx',(mx*spread*10).toFixed(2)+'px');
+     el.style.setProperty('--ly',(my*spread*7).toFixed(2)+'px');
+   });
+ };
  wrap.addEventListener('pointermove',e=>move(e.clientX,e.clientY),{passive:true});
- wrap.addEventListener('pointerleave',()=>{brand.style.setProperty('--rx','0deg');brand.style.setProperty('--ry','0deg');letters.forEach(el=>{el.style.setProperty('--lx','0px');el.style.setProperty('--ly','0px')})},{passive:true});
+ wrap.addEventListener('pointerleave',()=>{
+   brand.style.setProperty('--rx','0deg');brand.style.setProperty('--ry','0deg');
+   letters.forEach(el=>{el.style.setProperty('--lx','0px');el.style.setProperty('--ly','0px')});
+ },{passive:true});
 }
-
 function initPreviewScroll(){document.querySelectorAll('.grid').forEach(grid=>{if(grid.dataset.previewScroll==='1')return;grid.dataset.previewScroll='1';const wrap=document.createElement('div');wrap.className='preview-scroll-wrap';grid.parentNode.insertBefore(wrap,grid);wrap.appendChild(grid);const prev=document.createElement('button');prev.className='preview-scroll-btn preview-scroll-prev';prev.type='button';prev.setAttribute('aria-label','Previous preview');prev.innerHTML='‹';const next=document.createElement('button');next.className='preview-scroll-btn preview-scroll-next';next.type='button';next.setAttribute('aria-label','Next preview');next.innerHTML='›';wrap.append(prev,next);const cards=[...grid.children].filter(el=>el.classList.contains('card'));let index=0;const update=()=>{if(window.innerWidth>600){cards.forEach(c=>c.hidden=false);prev.hidden=true;next.hidden=true;return}cards.forEach((c,i)=>{c.hidden=i!==index});prev.hidden=cards.length<2;next.hidden=cards.length<2;prev.disabled=index<=0;next.disabled=index>=cards.length-1};prev.addEventListener('click',()=>{if(index>0){index--;update()}});next.addEventListener('click',()=>{if(index<cards.length-1){index++;update()}});window.addEventListener('resize',update);update()})}
 function bootChrome(active){if(!document.querySelector('.version-badge'))document.body.insertAdjacentHTML('afterbegin',`<div class="version-badge" aria-label="Portfolio version">${VERSION}</div>`);document.body.insertAdjacentHTML('afterbegin',`<div class="cursor-light" id="cursorLight"></div>`+nav(active));document.body.insertAdjacentHTML('beforeend','<div class="lightbox" id="lightbox"><button class="close" onclick="closeLightbox()">Close ✕</button><img id="lightboxImg" alt="Preview"></div>'+feedbackModal()+'<div class="feedback-toast" id="feedbackToast" role="status" aria-live="polite"></div>');initKineticHero();initPreviewScroll();initSFX();if(document.body.classList.contains('gfx-page'))initGfxMasonry();const c=document.getElementById('cursorLight');
  let mx=0,my=0,trail=[];
  window.addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY;if(c){c.style.left=mx+'px';c.style.top=my+'px'}},{passive:true});
- for(let i=0;i<9;i++){const dot=document.createElement('i');dot.className='cursor-trail';dot.style.setProperty('--n',i);document.body.append(dot);trail.push({el:dot,x:mx,y:my})}
- const animateTrail=()=>{let x=mx,y=my;trail.forEach((p,i)=>{p.x+=(x-p.x)*(.28-i*.018);p.y+=(y-p.y)*(.28-i*.018);p.el.style.transform='translate3d('+p.x+'px,'+p.y+'px,0) scale('+(1-i*.075)+')';x=p.x;y=p.y});requestAnimationFrame(animateTrail)};animateTrail()}
+ for(let i=0;i<12;i++){const dot=document.createElement('i');dot.className='cursor-trail';document.body.append(dot);trail.push({el:dot,x:mx,y:my,vx:0,vy:0})}
+ const animateTrail=()=>{
+   let tx=mx,ty=my;
+   trail.forEach((p,i)=>{
+     const stiffness=.22-i*.006,damping=.72;
+     p.vx=(p.vx+(tx-p.x)*stiffness)*damping;p.vy=(p.vy+(ty-p.y)*stiffness)*damping;
+     p.x+=p.vx;p.y+=p.vy;
+     p.el.style.transform='translate3d('+p.x+'px,'+p.y+'px,0) scale('+(1-i*.055)+')';
+     tx=p.x;ty=p.y;
+   });
+   requestAnimationFrame(animateTrail)
+ };
+ animateTrail()}
 function showFeedbackToast(message,type='info'){const t=document.getElementById('feedbackToast');if(!t)return;t.textContent=message;t.className=`feedback-toast show ${type}`;clearTimeout(window.feedbackToastTimer);window.feedbackToastTimer=setTimeout(()=>{t.classList.remove('show')},3500)}
 function openFeedback(){const o=document.getElementById('feedbackOverlay');if(!o)return;o.classList.add('open');o.setAttribute('aria-hidden','false');document.body.classList.add('modal-open');setTimeout(()=>document.getElementById('feedbackDiscord')?.focus(),50)}
 function closeFeedback(){const o=document.getElementById('feedbackOverlay');if(!o)return;o.classList.remove('open');o.setAttribute('aria-hidden','true');document.body.classList.remove('modal-open')}
