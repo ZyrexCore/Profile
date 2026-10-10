@@ -4,7 +4,7 @@ const GAME_UPDATE_NOTES = {
   gameName: "High Cortisol Obby",
   updateName: "UPDATE NOTES",
   subtitle: "No new updates right now. Check back soon for new features, fixes, and changes!",
-  image: "https://tr.rbxcdn.com/180DAY-03c1f2db258368bff7b9da09d1ae7aab/768/432/Image/Png/noFilter",
+  image: "https://raw.githubusercontent.com/ZyrexCore/Profile/main/update-placeholder.svg",
   playUrl: "https://www.roblox.com/games/138590507775487/High-Cortisol-Obby",
   notes: [
     "PLACEHOLDER: The dev is busy pretending this counts as an update.",
