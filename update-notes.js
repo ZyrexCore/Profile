@@ -1,13 +1,13 @@
 const GAME_UPDATE_NOTES = {
-  gameName: "YOUR GAME NAME",
-  updateName: "UPDATE NAME",
-  subtitle: "Write a short summary of this update here.",
-  image: "assets/update-cover.png",
-  playUrl: "https://www.roblox.com/",
+  gameName: "High Cortisol Obby",
+  updateName: "UPDATE NOTES",
+  subtitle: "Latest changes, fixes, and new content.",
+  image: "https://tr.rbxcdn.com/180DAY-03c1f2db258368bff7b9da09d1ae7aab/768/432/Image/Png/noFilter",
+  playUrl: "https://www.roblox.com/games/138590507775487/High-Cortisol-Obby",
   notes: [
-    "Add your first update note here.",
-    "Add another change, feature, or fix here.",
-    "Add more points as needed. The notes box scrolls independently."
+    "Add your latest update notes here.",
+    "List new features, improvements, and bug fixes point by point.",
+    "Add as many points as you need. This notes frame scrolls independently."
   ]
 };
 
