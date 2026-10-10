@@ -7,9 +7,9 @@ const GAME_UPDATE_NOTES = {
   image: "https://tr.rbxcdn.com/180DAY-03c1f2db258368bff7b9da09d1ae7aab/768/432/Image/Png/noFilter",
   playUrl: "https://www.roblox.com/games/138590507775487/High-Cortisol-Obby",
   notes: [
-    "Placeholder: New update notes will be posted here.",
-    "Placeholder: Check back for new features and improvements.",
-    "Placeholder: Bug fixes and other changes will be listed here."
+    "PLACEHOLDER: The dev is busy pretending this counts as an update.",
+    "PLACEHOLDER: New content is loading... please blame the developer.",
+    "PLACEHOLDER: Bugs are features until further notice."
   ]
 };
 
