@@ -52,15 +52,28 @@ function renderGameUpdateNotes() {
           ? '<ul class="update-notes-list">' + notes.map(note => '<li>' + escapeUpdateText(note) + '</li>').join("") + '</ul>'
           : '<p class="update-notes-empty">No update notes added yet.</p>'}
       </div>
+    </div>
+    <div class="update-notes-modal" id="updateNotesModal" role="dialog" aria-modal="true" aria-labelledby="updateNotesModalTitle" hidden>
+      <div class="update-notes-modal-card">
+        <div class="update-notes-modal-icon">💀</div>
+        <h3 id="updateNotesModalTitle">NO UPDATES RIGHT NOW</h3>
+        <p>Nothing new to play yet. The dev is probably calling a coffee break a content update.</p>
+        <button type="button" class="update-notes-modal-close">GOT IT</button>
+      </div>
     </div>`;
   const img = panel.querySelector(".update-notes-image");
   const fallback = panel.querySelector(".update-notes-image-fallback");
   if (img) img.addEventListener("error", () => { img.hidden = true; fallback.hidden = false; });
+  const modal = panel.querySelector(".update-notes-modal");
+  const closeModal = panel.querySelector(".update-notes-modal-close");
+  if (modal && closeModal) closeModal.addEventListener("click", () => { modal.hidden = true; });
+  if (modal) modal.addEventListener("click", event => { if (event.target === modal) modal.hidden = true; });
   const play = panel.querySelector(".update-notes-play");
   if (play && noUpdates) {
     play.addEventListener("click", event => {
       event.preventDefault();
-      window.alert("💀 NO UPDATES RIGHT NOW!\n\nThere’s nothing new to play yet. The dev is probably calling a coffee break a content update. Check back later!");
+      const modal = panel.querySelector(".update-notes-modal");
+      if (modal) modal.hidden = false;
     });
   } else if (!playUrl && play) {
     play.addEventListener("click", event => event.preventDefault());
