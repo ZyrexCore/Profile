@@ -1,19 +1,21 @@
 const GAME_UPDATE_NOTES = {
+  visible: true,
+  noUpdates: true,
   gameName: "High Cortisol Obby",
   updateName: "UPDATE NOTES",
-  subtitle: "Latest changes, fixes, and new content.",
+  subtitle: "No new updates right now. Check back soon for new features, fixes, and changes!",
   image: "https://tr.rbxcdn.com/180DAY-03c1f2db258368bff7b9da09d1ae7aab/768/432/Image/Png/noFilter",
   playUrl: "https://www.roblox.com/games/138590507775487/High-Cortisol-Obby",
   notes: [
-    "Add your latest update notes here.",
-    "List new features, improvements, and bug fixes point by point.",
-    "Add as many points as you need. This notes frame scrolls independently."
+    "Placeholder: New update notes will be posted here.",
+    "Placeholder: Check back for new features and improvements.",
+    "Placeholder: Bug fixes and other changes will be listed here."
   ]
 };
 
 function renderGameUpdateNotes() {
   const hero = document.querySelector(".hero-inner");
-  if (!hero || document.getElementById("gameUpdateNotes")) return;
+  if (!hero || document.getElementById("gameUpdateNotes") || GAME_UPDATE_NOTES.visible === false) return;
   const actions = hero.querySelector(".actions");
   const panel = document.createElement("section");
   panel.className = "update-notes";
@@ -23,7 +25,12 @@ function renderGameUpdateNotes() {
   const notes = Array.isArray(GAME_UPDATE_NOTES.notes) ? GAME_UPDATE_NOTES.notes : [];
   const image = String(GAME_UPDATE_NOTES.image || "").trim();
   const playUrl = String(GAME_UPDATE_NOTES.playUrl || "").trim();
-  const title = [GAME_UPDATE_NOTES.gameName, GAME_UPDATE_NOTES.updateName].filter(Boolean).join(" — ");
+  const title = GAME_UPDATE_NOTES.noUpdates
+    ? "NO UPDATES RIGHT NOW"
+    : [GAME_UPDATE_NOTES.gameName, GAME_UPDATE_NOTES.updateName].filter(Boolean).join(" — ");
+  const subtitle = GAME_UPDATE_NOTES.noUpdates
+    ? (GAME_UPDATE_NOTES.subtitle || "No new updates right now. Check back soon!")
+    : (GAME_UPDATE_NOTES.subtitle || "");
 
   panel.innerHTML = `
     <div class="update-notes-media">
@@ -34,13 +41,15 @@ function renderGameUpdateNotes() {
       <a class="btn primary update-notes-play" href="${escapeUpdateText(playUrl || "#")}" ${playUrl ? 'target="_blank" rel="noopener noreferrer"' : 'aria-disabled="true"'}>▶ PLAY NOW</a>
     </div>
     <div class="update-notes-content">
-      <div class="update-notes-label">LATEST UPDATE</div>
+      <div class="update-notes-label">${GAME_UPDATE_NOTES.noUpdates ? "GAME STATUS 🔥" : "LATEST UPDATE 🔥"}</div>
       <h2 class="update-notes-title" id="updateNotesTitle">${escapeUpdateText(title || "GAME NAME — UPDATE NAME")}</h2>
-      <p class="update-notes-subtitle">${escapeUpdateText(GAME_UPDATE_NOTES.subtitle || "")}</p>
+      <p class="update-notes-subtitle">${escapeUpdateText(subtitle)}</p>
       <div class="update-notes-divider"></div>
-      <h3 class="update-notes-list-title">PATCH NOTES</h3>
+      <h3 class="update-notes-list-title">${GAME_UPDATE_NOTES.noUpdates ? "COMING LATER" : "PATCH NOTES"}</h3>
       <div class="update-notes-scroll" tabindex="0" role="region" aria-label="Scrollable game update notes">
-        ${notes.length ? '<ul class="update-notes-list">' + notes.map(note => '<li>' + escapeUpdateText(note) + '</li>').join("") + '</ul>' : '<p class="update-notes-empty">No update notes added yet.</p>'}
+        ${notes.length
+          ? '<ul class="update-notes-list">' + notes.map(note => '<li>' + escapeUpdateText(note) + '</li>').join("") + '</ul>'
+          : '<p class="update-notes-empty">No update notes added yet.</p>'}
       </div>
     </div>`;
   const img = panel.querySelector(".update-notes-image");
