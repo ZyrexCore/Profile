@@ -25,6 +25,7 @@ function renderGameUpdateNotes() {
   const notes = Array.isArray(GAME_UPDATE_NOTES.notes) ? GAME_UPDATE_NOTES.notes : [];
   const image = String(GAME_UPDATE_NOTES.image || "").trim();
   const playUrl = String(GAME_UPDATE_NOTES.playUrl || "").trim();
+  const noUpdates = GAME_UPDATE_NOTES.noUpdates === true;
   const title = GAME_UPDATE_NOTES.noUpdates
     ? "NO UPDATES RIGHT NOW"
     : [GAME_UPDATE_NOTES.gameName, GAME_UPDATE_NOTES.updateName].filter(Boolean).join(" — ");
@@ -38,7 +39,7 @@ function renderGameUpdateNotes() {
         <img class="update-notes-image" src="${escapeUpdateText(image)}" alt="${escapeUpdateText(title)} cover" ${image ? "" : "hidden"}>
         <div class="update-notes-image-fallback" ${image ? "hidden" : ""}>GAME UPDATE</div>
       </div>
-      <a class="btn primary update-notes-play" href="${escapeUpdateText(playUrl || "#")}" ${playUrl ? 'target="_blank" rel="noopener noreferrer"' : 'aria-disabled="true"'}>▶ PLAY NOW</a>
+      <a class="btn primary update-notes-play ${noUpdates ? "update-notes-play-disabled" : ""}" href="${noUpdates ? "#" : escapeUpdateText(playUrl || "#")}" ${noUpdates || !playUrl ? 'aria-disabled="true"' : 'target="_blank" rel="noopener noreferrer"'}>▶ PLAY NOW</a>
     </div>
     <div class="update-notes-content">
       <div class="update-notes-label">${GAME_UPDATE_NOTES.noUpdates ? "GAME STATUS 🔥" : "LATEST UPDATE 🔥"}</div>
@@ -56,10 +57,13 @@ function renderGameUpdateNotes() {
   const fallback = panel.querySelector(".update-notes-image-fallback");
   if (img) img.addEventListener("error", () => { img.hidden = true; fallback.hidden = false; });
   const play = panel.querySelector(".update-notes-play");
-  if (!playUrl && play) {
+  if (play && noUpdates) {
+    play.addEventListener("click", event => {
+      event.preventDefault();
+      window.alert("💀 NO UPDATES RIGHT NOW!\n\nThere’s nothing new to play yet. The dev is probably calling a coffee break a content update. Check back later!");
+    });
+  } else if (!playUrl && play) {
     play.addEventListener("click", event => event.preventDefault());
-    play.style.opacity = ".55";
-    play.style.cursor = "not-allowed";
   }
   if (actions) actions.insertAdjacentElement("afterend", panel);
   else hero.appendChild(panel);
