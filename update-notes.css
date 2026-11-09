@@ -37,17 +37,17 @@
 @media(max-width:700px){.update-notes{grid-template-columns:minmax(0,1fr);gap:16px;padding:15px;margin-top:30px}.update-notes-media{width:min(100%,250px)}}
 
 /* Updated to fit the new editorial portfolio layout */
-.update-notes{border-color:#ded7cb!important;background:#fffdf8!important;box-shadow:none!important;border-radius:0!important}
-.update-notes-title{color:#20211f!important}
+.update-notes{border-color:#ded7cb!important;background:#101010!important;box-shadow:none!important;border-radius:0!important}
+.update-notes-title{color:#f5f5f5!important}
 .update-notes-subtitle,.update-notes-list li{color:#77766f!important}
-.update-notes-label,.update-notes-list-title{color:#bf3d23!important}
-.update-notes-label:before,.update-notes-list li:before{background:#e45232!important}
-.update-notes-image-wrap{background:#ebe6dc!important;border-color:#ded1c5!important;border-radius:0!important}
+.update-notes-label,.update-notes-list-title{color:#dedede!important}
+.update-notes-label:before,.update-notes-list li:before{background:#ffffff!important}
+.update-notes-image-wrap{background:#141414!important;border-color:#ded1c5!important;border-radius:0!important}
 .update-notes-play-disabled,.update-notes-play-disabled:hover{background:#e7e2d9!important;border-color:#d4ccbf!important;color:#918b80!important;opacity:1!important}
-.update-notes-modal-card{background:#fffdf8!important;border:1px solid #ded7cb!important;border-left:4px solid #e45232!important;border-radius:0!important}
-.update-notes-modal-card h3{color:#20211f!important}
+.update-notes-modal-card{background:#101010!important;border:1px solid #ded7cb!important;border-left:4px solid #ffffff!important;border-radius:0!important}
+.update-notes-modal-card h3{color:#f5f5f5!important}
 .update-notes-modal-card p{color:#77766f!important}
-.update-notes-modal-close{background:#20211f!important;color:#fff!important;border:0!important;border-radius:0!important}
+.update-notes-modal-close{background:#f5f5f5!important;color:#fff!important;border:0!important;border-radius:0!important}
 
 /* Fit the status card into the rebuilt two-column hero */
 .hero-copy>.update-notes{grid-template-columns:120px minmax(0,1fr)!important;width:100%!important;max-width:540px!important;margin:30px 0 0!important;padding:14px!important;border-radius:0!important}
