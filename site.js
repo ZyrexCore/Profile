@@ -20,7 +20,7 @@
     return `<header class="site-header"><div class="header-inner">
       <a class="wordmark" href="index.html"><span class="wordmark-mark">Z</span><span>ZYREXCORE<small>CREATIVE PORTFOLIO</small></span></a>
       <nav class="primary-nav" id="primaryNav" aria-label="Main navigation">${links.map(([key,url,label])=>`<a href="${url}" ${page===key?'aria-current="page"':""}>${label}</a>`).join("")}</nav>
-      <a class="header-contact" href="https://www.instagram.com/manvith_1005" target="_blank" rel="noopener">LET'S CONNECT ↗</a>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to light theme"><span class="theme-toggle-icon" aria-hidden="true">☼</span><span class="theme-toggle-label">LIGHT MODE</span></button>\n      <a class="header-contact" href="https://www.instagram.com/manvith_1005" target="_blank" rel="noopener">LET'S CONNECT ↗</a>
       <button class="menu-toggle" id="menuToggle" type="button" aria-label="Toggle navigation" aria-expanded="false">☰</button>
     </div></header>`;
   }
@@ -33,6 +33,22 @@
   function setupShell() {
     $("#siteHeader").innerHTML = header();
     $("#siteFooter").innerHTML = footer();
+    const themeButton = $("#themeToggle");
+    const applyTheme = theme => {
+      const next = theme === "light" ? "light" : "dark";
+      document.documentElement.dataset.theme = next;
+      const light = next === "light";
+      if (themeButton) {
+        themeButton.querySelector(".theme-toggle-icon").textContent = light ? "☾" : "☼";
+        themeButton.querySelector(".theme-toggle-label").textContent = light ? "DARK MODE" : "LIGHT MODE";
+        themeButton.setAttribute("aria-label", light ? "Switch to dark theme" : "Switch to light theme");
+      }
+      try { localStorage.setItem("zyrex_theme", next); } catch {}
+    };
+    let savedTheme = "dark";
+    try { savedTheme = localStorage.getItem("zyrex_theme") || "dark"; } catch {}
+    applyTheme(savedTheme);
+    themeButton?.addEventListener("click", () => applyTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark"));
     const toggle = $("#menuToggle"), nav = $("#primaryNav");
     toggle?.addEventListener("click", () => {
       const open = nav.classList.toggle("open");
@@ -46,6 +62,16 @@
     $("#feedbackCancel")?.addEventListener("click", closeFeedback);
     $("#feedbackOverlay")?.addEventListener("click", event => { if(event.target.id==="feedbackOverlay") closeFeedback(); });
     $("#feedbackForm")?.addEventListener("submit", sendFeedback);
+    setupRevealEffects();
+  }
+  function setupRevealEffects() {
+    const targets = document.querySelectorAll("main > section, .archive-head, .archive-tools, .work-group, .project-card, .audio-card, .about-inner");
+    targets.forEach((element, index) => { element.classList.add("reveal"); element.style.transitionDelay = (Math.min(index % 5, 4) * 55) + "ms"; });
+    if (!("IntersectionObserver" in window)) { targets.forEach(element => element.classList.add("is-visible")); return; }
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add("is-visible"); observer.unobserve(entry.target); } });
+    }, { threshold: 0.08, rootMargin: "0px 0px -35px 0px" });
+    targets.forEach(element => observer.observe(element));
   }
   async function loadManifest() {
     const response = await fetch(CONFIG.manifest, {cache:"no-store"});
