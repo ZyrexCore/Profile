@@ -14,9 +14,9 @@ const GAME_UPDATE_NOTES = {
 };
 
 function renderGameUpdateNotes() {
-  const hero = document.querySelector(".hero-inner");
+  const hero = document.querySelector(".hero-copy");
   if (!hero || document.getElementById("gameUpdateNotes") || GAME_UPDATE_NOTES.visible === false) return;
-  const actions = hero.querySelector(".actions");
+  const actions = hero.querySelector(".hero-actions");
   const panel = document.createElement("section");
   panel.className = "update-notes";
   panel.id = "gameUpdateNotes";
