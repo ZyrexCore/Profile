@@ -200,3 +200,7 @@ a{color:inherit}
  .update-notes-title{font-size:17px}
 }
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+
+.slide-controls{position:absolute;right:10px;bottom:10px;display:flex;align-items:center;gap:7px;padding:5px 7px;background:#f5f1e9ee;color:#20211f;font:9px var(--mono)}
+.slide-controls button{width:24px;height:24px;border:0;background:#20211f;color:#fff;cursor:pointer}
+.slide-controls button:hover{background:var(--accent)}
