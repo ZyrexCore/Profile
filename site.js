@@ -54,13 +54,15 @@
     return Array.isArray(data) ? data.slice().sort((a,b)=>(a.number||0)-(b.number||0)) : [];
   }
   function projectCard(item, category, options={}) {
-    const image = item.type==="game" ? (item.thumbnails?.[0] || "") : assetURL(item.file);
+    const images = item.type==="game" ? (item.thumbnails || []).filter(Boolean) : [assetURL(item.file)];
+    const image = images[0] || "";
     const isGame = item.type==="game";
     const number = String(item.number || 0).padStart(2,"0");
     const desc = isGame ? (item.description || "Roblox experience") : "";
     const actions = isGame && item.url ? `<div class="project-actions"><a class="small-link" href="${escapeHTML(item.url)}" target="_blank" rel="noopener">PLAY ON ROBLOX ↗</a></div>` : "";
-    return `<article class="project-card" ${image && !isGame ? `data-preview="${escapeHTML(image)}"` : ""}>
-      <div class="project-image">${image ? `<img src="${escapeHTML(image)}" alt="${escapeHTML(item.title)}" loading="lazy" decoding="async">` : '<div class="empty-state">PREVIEW NOT AVAILABLE</div>'}</div>
+    const slides = isGame && images.length>1 ? `<div class="slide-controls"><button type="button" data-slide="-1" aria-label="Previous screenshot">←</button><span>01 / ${String(images.length).padStart(2,"0")}</span><button type="button" data-slide="1" aria-label="Next screenshot">→</button></div>` : "";
+    return `<article class="project-card" ${image && !isGame ? `data-preview="${escapeHTML(image)}"` : ""} ${isGame ? `data-game-slides='${escapeHTML(JSON.stringify(images))}' data-slide-index="0"` : ""}>
+      <div class="project-image">${image ? `<img src="${escapeHTML(image)}" alt="${escapeHTML(item.title)}" loading="lazy" decoding="async">` : '<div class="empty-state">PREVIEW NOT AVAILABLE</div>'}${slides}</div>
       <div class="project-info"><div class="project-meta">${category} / ${number}</div><h4>${escapeHTML(item.title)}</h4>${isGame && options.description ? `<p>${escapeHTML(desc.slice(0,180))}${desc.length>180?"…":""}</p>` : ""}${actions}</div>
     </article>`;
   }
@@ -68,6 +70,15 @@
     if(!container) return;
     container.innerHTML = items.length ? items.map(item=>projectCard(item,category,options)).join("") : '<div class="empty-state">Nothing here yet — check back soon.</div>';
     container.querySelectorAll("[data-preview]").forEach(card => card.addEventListener("click", () => openLightbox(card.dataset.preview)));
+    container.querySelectorAll("[data-game-slides]").forEach(card => {
+      const slides=JSON.parse(card.dataset.gameSlides), image=$("img",card), counter=$(".slide-controls span",card);
+      card.querySelectorAll("[data-slide]").forEach(button=>button.addEventListener("click",event=>{
+        event.stopPropagation();
+        const next=(Number(card.dataset.slideIndex)+Number(button.dataset.slide)+slides.length)%slides.length;
+        card.dataset.slideIndex=String(next);image.src=slides[next];
+        counter.textContent=`${String(next+1).padStart(2,"0")} / ${String(slides.length).padStart(2,"0")}`;
+      }));
+    });
     container.querySelectorAll("a").forEach(link => link.addEventListener("click", event => event.stopPropagation()));
   }
   async function renderHome() {
