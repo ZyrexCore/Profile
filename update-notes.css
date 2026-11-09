@@ -12,3 +12,26 @@
 .update-notes-modal-close{grid-column:2;justify-self:start;min-height:30px;padding:0 15px;border:1px solid rgba(53,224,255,.28);border-radius:8px;background:rgba(53,224,255,.1);color:#7beaff;font-size:10px;font-weight:900;letter-spacing:.1em;cursor:pointer}
 @media(max-width:480px){.update-notes-modal{top:12px;right:12px;width:calc(100vw - 24px)}.update-notes-modal-card{padding:15px;grid-template-columns:36px minmax(0,1fr);column-gap:10px}.update-notes-modal-icon{width:36px;height:36px;font-size:21px}}
 @keyframes updateNotesToastIn{from{opacity:0;transform:translateX(24px) translateY(-8px)}to{opacity:1;transform:translateX(0) translateY(0)}}
+
+
+/* LIGHT EDITORIAL UPDATE CARD */
+.update-notes{grid-template-columns:minmax(150px,220px) minmax(0,1fr);gap:24px;width:min(100%,1040px);padding:20px;margin:40px auto 0;border:1px solid #dfe1e7;border-radius:12px;background:#fff;box-shadow:0 18px 50px rgba(24,30,40,.1);backdrop-filter:none}
+.update-notes-image-wrap{border:1px solid #e1e2e5;border-radius:8px;background:#eef0f4}
+.update-notes-content{padding:5px 2px}
+.update-notes-label{color:#5e6876;letter-spacing:.15em}
+.update-notes-label:before{background:#315cf5}
+.update-notes-title{color:#171a20}
+.update-notes-subtitle,.update-notes-list li{color:#656b73}
+.update-notes-divider{background:#e6e7e9}
+.update-notes-list-title{color:#5e6876}
+.update-notes-list li:before{background:#315cf5;box-shadow:none}
+.update-notes-scroll{scrollbar-color:#b8c2d5 #f1f2f4}
+.update-notes-scroll::-webkit-scrollbar-track{background:#f1f2f4}
+.update-notes-scroll::-webkit-scrollbar-thumb{background:#b8c2d5}
+.update-notes-play-disabled,.update-notes-play-disabled:hover{background:#e5e6e8!important;border-color:#d4d6da!important;color:#8b9098!important;opacity:1!important}
+.update-notes-modal-card{border:1px solid #d8d9dc;border-left:4px solid #315cf5;border-radius:10px;background:#fff;box-shadow:0 16px 55px rgba(20,24,32,.18)}
+.update-notes-modal-card h3{color:#171a20}
+.update-notes-modal-card p{color:#656b73}
+.update-notes-modal-icon{background:#eef1ff}
+.update-notes-modal-close{border:1px solid #cbd4ff;background:#eef1ff;color:#315cf5}
+@media(max-width:700px){.update-notes{grid-template-columns:minmax(0,1fr);gap:16px;padding:15px;margin-top:30px}.update-notes-media{width:min(100%,250px)}}
