@@ -48,3 +48,7 @@
 .update-notes-modal-card h3{color:#20211f!important}
 .update-notes-modal-card p{color:#77766f!important}
 .update-notes-modal-close{background:#20211f!important;color:#fff!important;border:0!important;border-radius:0!important}
+
+/* Fit the status card into the rebuilt two-column hero */
+.hero-copy>.update-notes{grid-template-columns:120px minmax(0,1fr)!important;width:100%!important;max-width:540px!important;margin:30px 0 0!important;padding:14px!important;border-radius:0!important}
+@media(max-width:620px){.hero-copy>.update-notes{grid-template-columns:90px minmax(0,1fr)!important;margin-top:24px!important;padding:10px!important}}
