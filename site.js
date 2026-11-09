@@ -106,6 +106,7 @@
       }));
     });
     container.querySelectorAll("a").forEach(link => link.addEventListener("click", event => event.stopPropagation()));
+    setupRevealEffects();
   }
   async function renderHome() {
     const all = await loadManifest();
