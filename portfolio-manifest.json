@@ -34,7 +34,7 @@
     "placeId": "87308704183587",
     "description": "LF NEW DEVS TO HELP OUT",
     "thumbnails": [
-      "https://tr.rbxcdn.com/180DAY-78243ba284d0b1103c39fde32a2a052f/768/432/GameMediaItem4/Png/noFilter"
+      "https://tr.rbxcdn.com/180DAY-980ef4b4b4639b6cfe29a484e537e847/768/432/GameMediaItem4/Png/noFilter"
     ],
     "name": "Testing Server 1",
     "universeId": 7709902819
@@ -42,72 +42,132 @@
   {
     "type": "gfx",
     "number": 1,
+    "title": "2x3 Foam Board",
+    "file": "GFX/2x3 Foam Board.jpg"
+  },
+  {
+    "type": "gfx",
+    "number": 2,
     "title": "AdmissionForm",
     "file": "GFX/AdmissionForm.jpg"
   },
   {
     "type": "gfx",
-    "number": 2,
+    "number": 3,
     "title": "Annualday Card",
     "file": "GFX/Annualday Card.png"
   },
   {
     "type": "gfx",
-    "number": 3,
+    "number": 4,
+    "title": "Artboard 1",
+    "file": "GFX/Artboard 1.jpg"
+  },
+  {
+    "type": "gfx",
+    "number": 5,
+    "title": "Back",
+    "file": "GFX/Back.jpg"
+  },
+  {
+    "type": "gfx",
+    "number": 6,
+    "title": "BOLPU",
+    "file": "GFX/BOLPU.jpg"
+  },
+  {
+    "type": "gfx",
+    "number": 7,
     "title": "Christmas PNG",
     "file": "GFX/Christmas PNG.jpg"
   },
   {
     "type": "gfx",
-    "number": 4,
+    "number": 8,
     "title": "Cover",
     "file": "GFX/Cover.jpg"
   },
   {
     "type": "gfx",
-    "number": 5,
+    "number": 9,
+    "title": "Front",
+    "file": "GFX/Front.jpg"
+  },
+  {
+    "type": "gfx",
+    "number": 10,
     "title": "gfx1",
     "file": "GFX/gfx1.png"
   },
   {
     "type": "gfx",
-    "number": 6,
+    "number": 11,
     "title": "gfx2",
     "file": "GFX/gfx2.png"
   },
   {
     "type": "gfx",
-    "number": 7,
+    "number": 12,
     "title": "gfx3",
     "file": "GFX/gfx3.png"
   },
   {
     "type": "gfx",
-    "number": 8,
+    "number": 13,
     "title": "gfx4",
     "file": "GFX/gfx4.png"
   },
   {
     "type": "gfx",
-    "number": 9,
+    "number": 14,
     "title": "KINNI PILI - Front",
     "file": "GFX/KINNI PILI - Front.jpg"
   },
   {
     "type": "gfx",
-    "number": 10,
+    "number": 15,
+    "title": "KINNI PILI",
+    "file": "GFX/KINNI PILI.jpg"
+  },
+  {
+    "type": "gfx",
+    "number": 16,
+    "title": "Manoj Menu Front",
+    "file": "GFX/Manoj Menu Front.jpg"
+  },
+  {
+    "type": "gfx",
+    "number": 17,
     "title": "Mudhra",
     "file": "GFX/Mudhra.jpg"
   },
   {
     "type": "gfx",
-    "number": 11,
+    "number": 18,
     "title": "Mudhra2.0",
     "file": "GFX/Mudhra2.0.jpg"
   },
   {
     "type": "gfx",
-    "number": 12,
+    "number": 19,
+    "title": "Satyanarayan Puja-2",
+    "file": "GFX/Satyanarayan Puja-2.jpg"
+  },
+  {
+    "type": "gfx",
+    "number": 20,
+    "title": "Satyanarayan Puja",
+    "file": "GFX/Satyanarayan Puja.jpg"
+  },
+  {
+    "type": "gfx",
+    "number": 21,
+    "title": "Shree Shakti",
+    "file": "GFX/Shree Shakti.jpg"
+  },
+  {
+    "type": "gfx",
+    "number": 22,
     "title": "sPORTS dAY",
     "file": "GFX/sPORTS dAY.png"
   }
