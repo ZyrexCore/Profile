@@ -42,7 +42,7 @@
     const ime = $(source).data('ime');
     if (ime) {
       ime.setLanguage('kn');
-      ime.load('kgp').done(() => { ime.setIM('kgp'); ime.enable(); });
+      ime.load('kn-kgp').done(() => { ime.setIM('kn-kgp'); ime.enable(); });
     }
   } else {
     showToast('Keyboard engine could not load — check your connection');
