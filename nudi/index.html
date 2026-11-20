@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b0b0c">
+<title>Nudi Web — Kannada ASCII Typing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anek+Kannada:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/wikimedia/jquery.ime@master/css/jquery.ime.css">
+<link rel="stylesheet" href="style.css">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/wikimedia/jquery.ime@master/jquery.ime.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/wikimedia/jquery.ime@master/jquery.ime.selector.js"></script>
+<script src="js/nudi-engine.js"></script>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="./"><span class="brand-mark">ನು</span><span>NUDI<span class="brand-light">WEB</span><small>KANNADA ASCII EDITOR</small></span></a>
+  <div class="top-actions"><span class="live-dot">ENGINE READY</span><button id="themeBtn" class="icon-btn" aria-label="Toggle theme">◐</button></div>
+</header>
+<main>
+  <section class="intro">
+    <div class="eyebrow"><span></span> KGP / NUDI KEYBOARD</div>
+    <h1>Type Kannada.<br><em>Keep it Nudi.</em></h1>
+    <p>A browser-based Nudi-style typing workspace. Use the KGP keyboard method and get legacy Nudi ASCII output — not English translation.</p>
+  </section>
+  <section class="workspace">
+    <div class="workspace-head"><div><span class="section-kicker">01 / INPUT</span><h2>Kannada typing area</h2></div><div class="keyboard-select"><label for="keyboard">INPUT METHOD</label><select id="keyboard"><option value="kgp">KGP / Nudi</option></select></div></div>
+    <div class="editor-wrap">
+      <div class="editor-label"><span><b class="status-dot"></b> KGP INPUT</span><span class="hint">Type with your regular keyboard</span></div>
+      <textarea id="source" spellcheck="false" placeholder="Start typing here using the KGP / Nudi keyboard layout…"></textarea>
+      <div class="editor-foot"><span id="inputCount">0 characters</span><button id="clearBtn" class="text-btn">CLEAR INPUT ↗</button></div>
+    </div>
+    <div class="conversion-line"><span></span><div>LIVE ENCODING <b>↓</b></div><span></span></div>
+    <div class="output-grid">
+      <article class="output-card ascii-card">
+        <div class="output-head"><div><span class="section-kicker">02 / LEGACY OUTPUT</span><h3>Nudi ASCII</h3></div><span class="format-pill">LEGACY FONT ENCODING</span></div>
+        <textarea id="ascii" readonly spellcheck="false" placeholder="Nudi ASCII output will appear here…"></textarea>
+        <div class="output-foot"><span id="asciiCount">0 bytes</span><div><button class="small-btn" id="copyAscii">COPY ASCII</button><button class="small-btn primary" id="downloadAscii">DOWNLOAD .TXT</button></div></div>
+      </article>
+      <article class="output-card preview-card">
+        <div class="output-head"><div><span class="section-kicker">03 / READABLE PREVIEW</span><h3>Kannada preview</h3></div><span class="format-pill green">UNICODE PREVIEW</span></div>
+        <div id="preview" class="preview-text">ನಿಮ್ಮ ಕನ್ನಡ ಪಠ್ಯ ಇಲ್ಲಿ ಕಾಣಿಸುತ್ತದೆ…</div>
+        <div class="output-foot"><span>Readable preview only</span><button class="small-btn" id="copyUnicode">COPY UNICODE</button></div>
+      </article>
+    </div>
+    <div class="notice"><span class="notice-icon">i</span><p><strong>Important:</strong> Nudi ASCII is legacy-font encoded text. It may look like Latin symbols in ordinary fonts. Use it with a compatible Nudi legacy font/editor. The Unicode preview is for reading and checking your typing.</p></div>
+  </section>
+  <section class="key-info">
+    <div><span class="section-kicker">BUILT FOR THE ORIGINAL WORKFLOW</span><h2>Not a translator.<br> A keyboard editor.</h2></div>
+    <div class="key-points"><p><b>01</b> KGP / Nudi input method</p><p><b>02</b> Legacy Nudi ASCII encoding</p><p><b>03</b> Live Unicode preview for verification</p><p><b>04</b> Copy and export plain-text output</p></div>
+  </section>
+</main>
+<footer><span>NUDI WEB · KANNADA ASCII WORKSPACE</span><span>Powered by the open-source Sanchaya Nudi conversion engine · GPL-3.0</span></footer>
+<div id="toast" role="status"></div>
+<script src="app.js"></script>
+</body>
+</html>
